@@ -1,0 +1,48 @@
+<mat-sidenav-container class="drawer-container mat-typography">
+  <mat-sidenav
+    #menu
+    class="menu"
+    mode="side"
+    opened="true"
+    (mouseenter)="onHover($event)"
+    (mouseleave)="onMouseLeave($event)"
+    fixedInViewport="true"
+    [@openMenu]="isMenuOpen ? 'opened' : 'closed'"
+  >
+    <div class="logo-container">
+      <img src="assets/images/diet.png" width="50" height="50" class />
+      <span>iNutrix</span>
+    </div>
+    <div class="divider"></div>
+    <mat-nav-list>
+      <div
+        class="menu-item-container"
+        *ngFor="let item of userMenu"
+        (click)="navigate(item)"
+      >
+        <div
+          class="icon-container custom-card"
+          [ngClass]="{ 'current-menu-item': item === currentPage }"
+        >
+          <custom-icon [iconData]="item.icon"></custom-icon>
+        </div>
+        <p matLine class="menu-item-name" [style.opacity]="isMenuOpen ? 1 : 0">
+          {{ item.name | translate }}
+        </p>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content [@openMenuContent]="isMenuOpen ? 'opened' : 'closed'">
+    <mat-toolbar class="toolbar">
+      <div class="page-name">
+        <span *ngIf="currentPage">{{ currentPage.name | translate }}</span>
+        <custom-icon [iconData]="infoIcon" (click)="showHint()"></custom-icon>
+      </div>
+    </mat-toolbar>
+    <div class="content custom-card">
+      <router-outlet></router-outlet>
+ 
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

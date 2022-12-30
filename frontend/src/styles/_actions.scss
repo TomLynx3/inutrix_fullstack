@@ -1,0 +1,41 @@
+.action-bar {
+  width: 50%;
+  display: flex;
+  padding: 0.5rem;
+  .action-bar-container {
+    margin-left: 15px;
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px 18px 10px 18px;
+    //background-color: red;
+
+    .action-text {
+      // margin-top: 0.2rem;
+      font-size: 10px;
+    }
+
+    custom-icon {
+      font-size: 18px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      // background-color: $accent-color;
+    }
+
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+  }
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}

@@ -1,0 +1,87 @@
+@import "../../../../styles/variables";
+
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-direction: column;
+}
+
+.carousel-container {
+  margin-left: 1rem;
+
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  .day-item {
+    width: 200px;
+    height: 200px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .date {
+      font-size: 1.2em;
+      color: $main-color;
+      font-weight: bold;
+      margin-top: 2rem;
+      text-align: center;
+    }
+  }
+}
+.carousel-container::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+.carousel-container > div {
+  float: left;
+  margin-right: -100%;
+  cursor: pointer;
+  transform-origin: top left;
+}
+
+.carousel-container > div {
+  border-radius: 1rem;
+}
+.carousel-container > div {
+  border-radius: 1rem;
+}
+
+@media screen and (max-width: 1600px) {
+  .carousel-container {
+    margin-left: 1rem;
+
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    .day-item {
+      width: 150px;
+      height: 150px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      .date {
+        font-size: 1.2em;
+        color: $main-color;
+        font-weight: bold;
+        margin-top: 2rem;
+        text-align: center;
+      }
+      .date p {
+        margin: 10px 0 12px;
+      }
+    }
+  }
+}

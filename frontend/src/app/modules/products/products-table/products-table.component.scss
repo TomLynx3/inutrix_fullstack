@@ -1,0 +1,27 @@
+@import "../../../../styles/variables";
+
+.product-table {
+  height: 90%;
+}
+
+.sidebar-content {
+  margin-top: 0;
+  display: inline-block;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+.select-all-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 130px;
+  text-align: left;
+}
+
+@media screen and (max-width: 1600px) {
+  .product-table {
+    height: 85%;
+    width: auto;
+  }
+}

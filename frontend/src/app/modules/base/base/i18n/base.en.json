@@ -1,0 +1,16 @@
+{
+  "BASE_USERMENU_SETTINGS": "Settings",
+  "BASE_USERMENU_PRODUCTS": "Products",
+  "BASE_USERMENU_MEAL_PLANS": "Meal plans",
+  "BASE_USERMENU_CALENDAR": "Calendar",
+  "BASE_CALORIES": "Calories",
+  "BASE_YOU_BURN_CALORIES": "You burn",
+  "BASE_YOU_BURN_CALORIES_2": "calories during a typical day.",
+  "BASE_BMR_RATE": "Your BMR (base metabolic rate) is.",
+  "BASE_HINTS_GENERAL_INFO": "In this part of the application user can change his weight, height, age, gender and activity level",
+  "BASE_HINTS_GENERAL_INFO_2": "See how much calories user needs during the day depending on his parametrs",
+  "BASE_HINTS_GENERAL_INFO_3": "Add certain products to ban list. Products which are in ban list are not used in diet creation",
+  "BASE_HINTS_OPEN_PRODUCT_SELECTION": "To add products to ban list first of all press add button which will open product list on the right side",
+  "BASE_HINTS_OPEN_PRODUCT_SELECTION_DONE": "Select products which you want to add to ban list and then press SELECT button.",
+  "BASE_HINTS_UNBAN_PRODUCTS": "To remove products from ban list just make selection and press REMOVE button"
+}

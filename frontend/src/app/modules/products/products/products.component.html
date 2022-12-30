@@ -1,0 +1,39 @@
+<div class="action-bar custom-card">
+  <div class="action-bar-container" (click)="addNewProduct()">
+    <custom-icon [iconData]="addIcon" class="success"></custom-icon>
+    <span class="action-text">{{ "COMMON_ADD" | translate }}</span>
+  </div>
+  <div class="action-bar-container" (click)="productTable.delete()">
+    <custom-icon [iconData]="deleteIcon" class="danger"></custom-icon>
+    <span class="action-text">{{ "COMMON_DELETE" | translate }}</span>
+  </div>
+</div>
+
+<products-table #productTable [allowOnlySelection]="false"></products-table>
+
+<ng-template #sidebar>
+  <div class="sidebar-container">
+    <div class="sidebar-header custom-card">
+      {{ "PRODUCTS_TABLE_ADD_NEW_PRODUCT" | translate }}
+    </div>
+    <div class="sidebar-content">
+      <add-product
+        (submitProductFormGroup)="saveProductFormGroup($event)"
+        (submitProductForm)="saveProduct($event)"
+        #child
+      ></add-product>
+    </div>
+    <div class="sidebar-footer custom-card">
+      <button class="btn btn-primary shadow-none me-2" (click)="close()">
+        {{ "COMMON_CLOSE" | translate }}
+      </button>
+      <button
+        class="btn btn-primary shadow-none me-2"
+        (click)="child.submit()"
+        [ngClass]="{ disabled: !productForm.valid }"
+      >
+        {{ "COMMON_ADD" | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>

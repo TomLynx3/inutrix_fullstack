@@ -1,0 +1,99 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.user-settings {
+  padding: 1rem;
+  width: 350px;
+}
+
+.calories-container {
+  height: 50%;
+  width: 60%;
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.calories-container .highlight {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.calories-container .description {
+  margin-top: 1rem;
+  line-height: 2em;
+  font-style: italic;
+}
+
+.calories-container .AMR {
+  background-color: #39a0ed;
+  width: 60%;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+.calories-container .AMR .amount {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.calories-container .AMR .label {
+  margin-top: 1rem;
+}
+
+::ng-deep .ban-list-container {
+  margin-top: 2.5rem;
+}
+/*# sourceMappingURL=settings.component.css.map */

@@ -1,0 +1,102 @@
+<div class="action-bar custom-card">
+  <div class="action-bar-container" (click)="addNewMealPlan()">
+    <custom-icon [iconData]="addIcon"></custom-icon>
+    <span class="action-text">{{ "COMMON_ADD" | translate }}</span>
+  </div>
+  <div class="action-bar-container"></div>
+</div>
+<div class="tab-container">
+  <mat-tab-group #tabs>
+    <mat-tab
+      label="{{ 'MEAL_PLAN_NEW_DIET' | translate }}"
+      *ngIf="diet && diet.dietDays.length > 0"
+    >
+      <diet-plan [diet]="diet" (onDietSave)="saveDiet()"></diet-plan>
+    </mat-tab>
+    <mat-tab label="{{ 'MEAL_PLAN_DIETS' | translate }}">
+      <diets></diets
+    ></mat-tab>
+  </mat-tab-group>
+</div>
+
+<ng-template #sidebar>
+  <div class="sidebar-container">
+    <div class="sidebar-header custom-card">
+      {{ "MEAL_PLAN_NEW_MEAL_PLAN" | translate }}
+    </div>
+    <div class="sidebar-content">
+      <div class="diet-goal-container">
+        <div class="diet-goal">
+          <div
+            class="image custom-card"
+            (click)="selectDietGoal(DietGoal.MUSCLEGROWTH)"
+            [ngClass]="{
+              'selected-type': dietGoal === DietGoal.MUSCLEGROWTH
+            }"
+          >
+            <img src="assets/images/muscle.png" width="100" height="100" />
+          </div>
+          <p class="title">{{ "MEAL_PLAN_MUSCLE_GROWTH" | translate }}</p>
+        </div>
+        <div class="diet-goal">
+          <div
+            class="image custom-card"
+            (click)="selectDietGoal(DietGoal.BALANCEDIET)"
+            [ngClass]="{
+              'selected-type': dietGoal === DietGoal.BALANCEDIET
+            }"
+          >
+            <img src="assets/images/balanced.png" width="100" height="100" />
+          </div>
+          <p class="title">{{ "MEAL_PLAN_BALANCED_DIET" | translate }}</p>
+        </div>
+        <div class="diet-goal">
+          <div
+            class="image custom-card"
+            (click)="selectDietGoal(DietGoal.WEIGHTLOSS)"
+            [ngClass]="{
+              'selected-type': dietGoal === DietGoal.WEIGHTLOSS
+            }"
+          >
+            <img src="assets/images/weight_lose.png" width="100" height="100" />
+          </div>
+          <p class="title">{{ "MEAL_PLAN_WEIGHT_LOSS" | translate }}</p>
+        </div>
+      </div>
+      <div class="selection-info">
+        <div class="text">{{ "MEAL_PLAN_I_WANT_DIET_FOR" | translate }}</div>
+        <div class="dropdown" dropDown>
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {{ selectedDayAmount }}
+          </button>
+          <div class="dropdown-menu">
+            <a
+              class="dropdown-item"
+              dropDownItem
+              *ngFor="let day of days"
+              (click)="selectDayAmout(day)"
+            >
+              {{ day }}
+            </a>
+          </div>
+        </div>
+        <div class="text">{{ "MEAL_PLAN_DAYS" | translate }}</div>
+      </div>
+    </div>
+    <div class="sidebar-footer custom-card">
+      <button class="btn btn-primary shadow-none me-2" (click)="close()">
+        {{ "COMMON_CLOSE" | translate }}
+      </button>
+      <button class="btn btn-primary shadow-none me-2" (click)="createDiet()">
+        {{ "COMMON_CREATE" | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>

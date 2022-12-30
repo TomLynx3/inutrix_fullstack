@@ -1,0 +1,62 @@
+.meals-container {
+  margin-top: 1rem;
+}
+
+.meals-container .meals {
+  padding: 0.5rem;
+  height: 75%;
+  overflow-y: scroll;
+}
+
+.meals-container .drag-and-drop {
+  background-image: repeating-linear-gradient(13deg, #39a0ed, #39a0ed 10.56px, transparent 12px, transparent 22.56px, #39a0ed 24px), repeating-linear-gradient(103deg, #39a0ed, #39a0ed 10.56px, transparent 12px, transparent 22.56px, #39a0ed 24px), repeating-linear-gradient(193deg, #39a0ed, #39a0ed 10.56px, transparent 12px, transparent 22.56px, #39a0ed 24px), repeating-linear-gradient(283deg, #39a0ed, #39a0ed 10.56px, transparent 12px, transparent 22.56px, #39a0ed 24px);
+  background-size: 3px calc(100% + 24.63px), calc(100% + 24.63px) 3px, 3px calc(100% + 24.63px), calc(100% + 24.63px) 3px;
+  background-position: 0 0, 0 0, 100% 0, 0 100%;
+  background-repeat: no-repeat;
+  -webkit-animation: borderAnimation 1s infinite linear;
+          animation: borderAnimation 1s infinite linear;
+}
+
+@-webkit-keyframes borderAnimation {
+  from {
+    background-position: 0 0, -24.63px 0, 100% -24.63px, 0 100%;
+  }
+  to {
+    background-position: 0 -24.63px, 0 0, 100% 0, -24.63px 100%;
+  }
+}
+
+@keyframes borderAnimation {
+  from {
+    background-position: 0 0, -24.63px 0, 100% -24.63px, 0 100%;
+  }
+  to {
+    background-position: 0 -24.63px, 0 0, 100% 0, -24.63px 100%;
+  }
+}
+
+.meals-container .meal-type-swicther-container {
+  height: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.meals-container .meal-type-swicther-container custom-icon {
+  font-size: 3em;
+}
+
+.meals-container .meal-type-swicther-container custom-icon:hover {
+  cursor: pointer;
+}
+
+.meals-container .meal-type-swicther-container span {
+  font-size: 2em;
+  font-weight: bold;
+}
+/*# sourceMappingURL=diet-meals.component.css.map */

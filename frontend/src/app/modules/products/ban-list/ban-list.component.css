@@ -1,0 +1,128 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.ban-list-container {
+  position: relative;
+}
+
+.ban-list-container .title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.ban-list-container .product-ban-list {
+  overflow: hidden;
+  min-width: 600px;
+  max-height: 400px;
+  min-height: 200px;
+  overflow-y: scroll;
+}
+
+.ban-list-container .product-ban-list .mat-header-cell {
+  width: 50%;
+}
+
+.ban-list-container .table-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 600px;
+}
+
+.ban-list-container .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100% !important;
+  min-width: 150px !important;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.ban-list-container .action-header-container {
+  color: #36f1cd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.ban-list-container .action-header-container:hover {
+  cursor: pointer;
+}
+
+.ban-list-container .action-header-container .action-name {
+  font-size: 0.8em;
+}
+
+.ban-list-container .remove {
+  color: #e61444 !important;
+}
+
+.ban-list-container .empty-list {
+  color: white;
+  margin-top: 2rem;
+  position: absolute;
+}
+
+.ban-list-container .empty-list p {
+  font-size: 1.5em;
+  font-style: italic;
+  color: rgba(238, 231, 231, 0.54);
+  font-weight: bold;
+}
+
+.sidebar-content {
+  min-height: 700px;
+}
+
+.sidebar-content .product-table {
+  height: 100%;
+}
+
+.sidebar-content .product-table ::ng-deep table .mat-header-cell {
+  font-size: 1em;
+}
+
+.search-container {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  max-width: 40%;
+}
+
+.search-container .text-muted {
+  color: black !important;
+}
+/*# sourceMappingURL=ban-list.component.css.map */

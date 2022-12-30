@@ -1,0 +1,73 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.list-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  width: 70%;
+}
+
+.list-container .diet-item-container {
+  padding: 0.7rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.list-container .diet-item-container .diet-goal {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.list-container .diet-item-container .diet-day-amount {
+  text-align: center;
+}
+
+.list-container .diet-item-container .label {
+  font-size: 0.8em;
+  color: #d1ccbe;
+  font-style: italic;
+  font-weight: normal;
+}
+
+::ng-deep.modal-content {
+  z-index: 1000 !important;
+}
+
+.diet-summary {
+  margin-top: 3rem;
+  font-size: 1.5em;
+}
+
+.diet-summary .highlight {
+  font-size: 1.2em;
+  color: #39a0ed;
+}
+/*# sourceMappingURL=diets.component.css.map */

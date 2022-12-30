@@ -1,0 +1,144 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.action-container {
+  width: 20%;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+.sidebar-content {
+  height: 70% !important;
+}
+
+.tab-container {
+  margin-top: 2rem;
+  padding: 0.5rem;
+  height: 85%;
+}
+
+.diet-goal-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.diet-goal-container .diet-goal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.diet-goal-container .diet-goal .image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 150px;
+  height: 150px;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+.diet-goal-container .diet-goal .image:hover {
+  cursor: pointer;
+  background: #36f1cd;
+}
+
+.diet-goal-container .diet-goal .title {
+  margin-top: 0.5rem;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.diet-goal-container .selected-type {
+  background: #36f1cd;
+}
+
+.selection-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 250px;
+}
+
+.selection-info .text {
+  margin-bottom: 0.5rem;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.selection-info .dropdown {
+  width: 75px;
+}
+
+.selection-info .dropdown .dropdown-menu {
+  max-height: 250px;
+}
+/*# sourceMappingURL=meal-plan.component.css.map */

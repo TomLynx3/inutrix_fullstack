@@ -1,0 +1,59 @@
+<swiper [pagination]="true" class="mySwiper">
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "BASE_HINTS_GENERAL_INFO" | translate }}</span
+        >
+      </div>
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "BASE_HINTS_GENERAL_INFO_2" | translate }}</span
+        >
+      </div>
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "BASE_HINTS_GENERAL_INFO_3" | translate }}</span
+        >
+      </div>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/settings/add_button_ban_list_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "BASE_HINTS_OPEN_PRODUCT_SELECTION" | translate }}
+      </p>
+      <img
+        src="assets/images/hints/products/select_product_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "BASE_HINTS_OPEN_PRODUCT_SELECTION_DONE" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/settings/product_selection_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "BASE_HINTS_UNBAN_PRODUCTS" | translate }}
+      </p>
+    </div>
+  </ng-template>
+</swiper>

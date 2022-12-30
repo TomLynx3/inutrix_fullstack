@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-3">
+    <div class="user-settings">
+      <user-data-form
+        #userDataForm
+        (onChange)="onFormChange($event)"
+        [btnLabel]="'COMMON_SAVE'"
+        (submitForm)="saveData($event)"
+      ></user-data-form>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="calories-container">
+      <div class="AMR" [ngStyle]="{ backgroundColor: containerColor }">
+        <span class="amount">
+          {{ metabolicRates?.AMR | number: "1.2-2" }} cal
+        </span>
+      </div>
+      <div class="description">
+        <span>
+          {{ "BASE_YOU_BURN_CALORIES" | translate }}
+          <span class="highlight">
+            {{ metabolicRates?.AMR | number: "1.2-2" }}
+          </span>
+          {{ "BASE_YOU_BURN_CALORIES_2" | translate }}
+        </span>
+        <br />
+        <span>
+          {{ "BASE_BMR_RATE" | translate }}
+          <span class="highlight">
+            {{ metabolicRates?.BMR | number: "1.2-2" }}
+          </span>
+        </span>
+      </div>
+    </div>
+    <product-ban-list></product-ban-list>
+  </div>
+</div>

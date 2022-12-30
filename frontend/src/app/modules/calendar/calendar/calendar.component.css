@@ -1,0 +1,79 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.content-container {
+  height: 100%;
+  display: relative;
+}
+
+.content-container .diet-progress-container {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.content-container .diet-progress-container .diet-progess {
+  margin-top: 1rem;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content-container .diet-progress-container .diet-progess .progress-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.no-active-diet {
+  padding: 2rem;
+  font-size: 1.5em;
+}
+
+.no-active-diet a {
+  color: #39a0ed;
+}
+/*# sourceMappingURL=calendar.component.css.map */

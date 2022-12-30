@@ -1,0 +1,111 @@
+<div class="row product-container">
+  <div class="col-3 center">
+    <div class="flex-container">
+      <div class="meal-type-switcher-container">
+        <custom-icon
+          [iconData]="arrowLeft"
+          [ngClass]="{ disabled: currentMealIndex === 0 }"
+          (click)="prevMeal()"
+        ></custom-icon>
+        <span>{{ mealType | translate }}</span>
+        <custom-icon
+          [iconData]="arrowRight"
+          [ngClass]="{ disabled: currentMealIndex === 2 }"
+          (click)="nextMeal()"
+        ></custom-icon>
+      </div>
+      <div class="consumed-all">
+        <mat-checkbox
+          #complete
+          (change)="onCompleteChange($event)"
+          [disabled]="!allowUpdate"
+          >{{ "CALENDAR_COMPLETE" | translate }}</mat-checkbox
+        >
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="product-list custom-card">
+      <div class="list">
+        <div
+          class="product-item-container"
+          *ngFor="let product of dietProductItems"
+        >
+          <div class="row">
+            <div class="col-2">
+              <div
+                class="icon-container custom-card"
+                [ngStyle]="{
+                  'background-color': product.productGroupIcon.color
+                }"
+              >
+                <custom-icon
+                  [iconData]="product.productGroupIcon.icon"
+                ></custom-icon>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="product-name-container">
+                <div class="product-title">
+                  {{ product.name | translate }}
+                </div>
+                <div
+                  class="product-group"
+                  [ngStyle]="{ color: product.productGroupIcon.color }"
+                >
+                  {{ product.productGroupName | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="amount-container">
+                <div class="form-input">
+                  <div class="input-group">
+                    <input
+                      [readonly]="true"
+                      type="text"
+                      class="form-control shadow-none"
+                      [value]="product.amount"
+                    />
+                  </div>
+                </div>
+                <span class="grams">g</span>
+              </div>
+            </div>
+            <div class="col-3 consumed-checkbox">
+              <mat-checkbox
+                [checked]="product.consumed"
+                [disabled]="!allowUpdate"
+                (change)="onProductConsume($event, product)"
+                >{{ "CALENDAR_CONSUMED" | translate }}</mat-checkbox
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-3 center">
+    <div class="diet-info-container">
+      <div
+        class="calories-container"
+        [ngStyle]="{ 'background-color': containerColor }"
+      >
+        <div class="text">{{ kcal | number : "1.2-2" }} kcal</div>
+      </div>
+      <div style="text-align: center">
+        <p>
+          {{ "MEAL_PLAN_DIET_GOAL" | translate }}
+          <span class="diet-goal" [ngStyle]="{ color: containerColor }"
+            >{{ dietGoalName | translate }}.</span
+          >
+        </p>
+        <p>
+          {{ "MEAL_PLAN_DIET_NEEDED_CALORIES" | translate }}
+          {{ kcal | number : "1.2-2" }} kcal
+        </p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>

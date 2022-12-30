@@ -1,0 +1,78 @@
+<div class="list-container">
+  <div *ngFor="let item of diets" class="diet-item-container row">
+    <div class="col-1">
+      <custom-icon [iconData]="item.dietGoalIcon"></custom-icon>
+    </div>
+    <div class="col-1">
+      <div class="diet-day-amount">
+        <!-- {{ item.name != null ? item.name : "N/A" }}
+        <div class="label">{{ "MEAL_PLAN_NAME_LABEL" | translate }}</div> -->
+        {{ item.days }}
+        <div class="label">{{ "MEAL_PLAN_DAYS" | translate }}</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="diet-goal" [ngStyle]="{ color: item.color }">
+        <div>{{ item.dietGoalName | translate }}</div>
+        <div class="label">{{ "MEAL_PLAN_DIET_GOAL_LABEL" | translate }}</div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="kcal-container">{{ item.kcal | number : "1.2-2" }} kcal</div>
+      <div class="label">{{ "MEAL_PLAN_CALORIES_LABEL" | translate }}</div>
+    </div>
+    <div class="col-2">
+      {{ item.createdAt | dateFormat : "L" }}
+      <div class="label">
+        {{ "MEAL_PLAN_CREATED_AT_LABEL" | translate }}
+      </div>
+    </div>
+    <div class="col-3">
+      <button
+        class="btn btn-primary w-100 shadown-none"
+        (click)="setNewActiveDiet(item)"
+      >
+        {{ "MEAL_PLAN_USE_AS_CURRENT_DIET" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #sidebar>
+  <div class="sidebar-container">
+    <div class="sidebar-header custom-card">
+      {{ "MEAL_PLAN_SET_NEW_DIET" | translate }}
+    </div>
+    <div class="sidebar-content">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>{{ "MEAL_PLAN_START_DIET_FROM" | translate }}</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [formControl]="date"
+          [matDatepickerFilter]="filter"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker [startAt]="fromDate"></mat-datepicker>
+      </mat-form-field>
+      <div class="diet-summary">
+        {{ "MEAL_PLAN_SUMMARY_DIET_START" | translate }}
+        <span class="highlight"> {{ date.value | dateFormat : "L" }}</span>
+        {{ "MEAL_PLAN_SUMMARY_DIET_WILL_LAST" | translate }}
+        <span class="highlight"> {{ selectedDiet?.days }}</span>
+        {{ "MEAL_PLAN_SUMMARY_DIET_WILL_FINISH_BY" | translate }}
+        <span class="highlight"> {{ finishDate | dateFormat : "L" }}</span>
+      </div>
+    </div>
+    <div class="sidebar-footer custom-card">
+      <button class="btn btn-primary shadow-none me-2" (click)="close()">
+        {{ "COMMON_CLOSE" | translate }}
+      </button>
+      <button class="btn btn-primary shadow-none me-2" (click)="setDiet()">
+        {{ "MEAL_PLAN_SET" | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>

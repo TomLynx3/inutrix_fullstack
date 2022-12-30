@@ -1,0 +1,35 @@
+@import "../../../styles/variables";
+
+::ng-deep .mat-dialog-container {
+  min-width: 500px;
+  min-height: 200px;
+}
+::ng-deep .mat-dialog-content {
+  font-size: 1.1em;
+}
+
+::ng-deep .mat-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.sub-text {
+  margin-top: 1.5rem;
+}
+
+.cancel-btn {
+  background-color: $main-color;
+
+  &:hover {
+    background-color: $main-color !important;
+    filter: brightness(0.8) !important;
+    -webkit-filter: brightness(0.8) !important;
+  }
+}
+
+.yes-btn {
+  background-color: $accent-color;
+  min-width: 75px;
+}

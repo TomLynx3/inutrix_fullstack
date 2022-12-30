@@ -1,0 +1,50 @@
+@import "../styles/variables";
+
+.form-text {
+  color: white !important;
+  margin-bottom: 0.5rem;
+}
+
+.input-group {
+  margin-top: 0.5rem;
+
+  .form-check-label {
+    font-size: 1.2em;
+  }
+  .form-check-input {
+    transform: scale(1.4);
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -o-transform: scale(1.4);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.form-input {
+  margin-top: 1.5rem;
+
+  .required-asterix {
+    position: absolute;
+    color: $error-color;
+    font-size: 1.2em;
+    margin-left: 0.4rem;
+    margin-top: -0.3rem;
+  }
+}
+
+.input-group-text {
+  background-color: $accent-color;
+  border: none;
+  color: white;
+
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+
+  custom-icon {
+    font-size: 1.2em;
+  }
+}

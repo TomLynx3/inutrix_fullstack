@@ -1,0 +1,77 @@
+.nutrition-container {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 80%;
+}
+
+::ng-deep custom-icon img {
+  width: 27px !important;
+  height: 27px !important;
+}
+
+.text-muted {
+  font-size: 0.9em;
+}
+
+.details-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.details-container .calories-container {
+  width: 35%;
+  max-width: 350px;
+  height: 75px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+.details-container .calories-container .text {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.details-container .details-info {
+  margin-top: 1rem;
+}
+
+.details-container .details-info p {
+  font-size: 1.1em;
+}
+
+.details-container .details-info .diet-goal {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+/*# sourceMappingURL=diet-day-nutrition.component.css.map */

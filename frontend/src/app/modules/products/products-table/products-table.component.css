@@ -1,0 +1,39 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.product-table {
+  height: 90%;
+}
+
+.sidebar-content {
+  margin-top: 0;
+  display: inline-block;
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+  position: relative;
+}
+/*# sourceMappingURL=products-table.component.css.map */

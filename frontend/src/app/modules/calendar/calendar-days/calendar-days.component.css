@@ -1,0 +1,99 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.content-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.carousel-container {
+  margin-left: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.carousel-container .day-item {
+  width: 200px;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.carousel-container .day-item .date {
+  font-size: 1.2em;
+  color: #4c6085;
+  font-weight: bold;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.carousel-container::after {
+  content: " ";
+  display: block;
+  clear: both;
+}
+
+.carousel-container > div {
+  float: left;
+  margin-right: -100%;
+  cursor: pointer;
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.carousel-container > div {
+  border-radius: 1rem;
+}
+
+.carousel-container > div {
+  border-radius: 1rem;
+}
+/*# sourceMappingURL=calendar-days.component.css.map */

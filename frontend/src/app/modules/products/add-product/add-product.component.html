@@ -1,0 +1,387 @@
+<div class="form-container">
+  <form [formGroup]="productAddForm">
+    <div class="form-input">
+      <div class="form-text text-muted">
+        {{ "PRODUCT_FORM_NAME" | translate }}
+        <span
+          class="required-asterix"
+          *ngIf="productAddForm?.controls?.productName?.errors?.required"
+          >*</span
+        >
+      </div>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <custom-icon
+              [iconData]="nameIcon"
+              style="color: #ecdd7b"
+            ></custom-icon>
+          </div>
+        </div>
+        <input
+          formControlName="productName"
+          type="text"
+          class="form-control shadow-none"
+          placeholder="{{ 'PRODUCT_FORM_NAME' | translate }}"
+        />
+      </div>
+    </div>
+    <div class="form-input">
+      <div class="form-text text-muted">
+        {{ "PRODUCTS_TABLE_PRODUCT_GROUP" | translate }}
+        <span
+          class="required-asterix"
+          *ngIf="productAddForm?.controls?.productGroup?.errors?.required"
+          >*</span
+        >
+      </div>
+      <div class="dropdown" dropDown>
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <div *ngIf="selectedActivityType">
+            {{ selectedActivityType!.groupName | translate }}
+          </div>
+        </button>
+        <div class="dropdown-menu">
+          <a
+            class="dropdown-item"
+            dropDownItem
+            *ngFor="let group of productGroups"
+            (click)="selectProductType(group)"
+          >
+            {{ group.groupName | translate }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          {{ "PRODUCTS_TABLE_PROTEIN" | translate }}
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.protein?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="proteinIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="protein"
+            type="number"
+            class="form-control shadow-none"
+            placeholder=" {{ 'PRODUCTS_TABLE_PROTEIN' | translate }}"
+          />
+        </div>
+      </div>
+
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          {{ "PRODUCTS_TABLE_FAT" | translate }}
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.fat?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="fatIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="fat"
+            type="number"
+            class="form-control shadow-none"
+            placeholder=" {{ 'PRODUCTS_TABLE_FAT' | translate }}"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-input">
+      <div class="form-text text-muted">
+        {{ "PRODUCTS_TABLE_CARBOHYDRATES" | translate }}
+        <span
+          class="required-asterix"
+          *ngIf="productAddForm?.controls?.carbohydrates?.errors?.required"
+          >*</span
+        >
+      </div>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <custom-icon
+              [iconData]="carboIcon"
+              style="color: #7ae7c7"
+            ></custom-icon>
+          </div>
+        </div>
+        <input
+          formControlName="carbohydrates"
+          type="number"
+          class="form-control shadow-none"
+          placeholder=" {{ 'PRODUCTS_TABLE_CARBOHYDRATES' | translate }}"
+        />
+      </div>
+    </div>
+
+    <div class="row g-3">
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          {{ "PRODUCTS_TABLE_kJ" | translate }}
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.kj?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon
+                [iconData]="jIcon"
+                style="color: #d3e298"
+              ></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="kj"
+            type="number"
+            class="form-control shadow-none"
+            placeholder=" {{ 'PRODUCTS_TABLE_kJ' | translate }}"
+          />
+        </div>
+      </div>
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          {{ "PRODUCTS_TABLE_kcal" | translate }}
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.kcal?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon
+                [iconData]="calloryIcon"
+                style="color: #ce8147"
+              ></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="kcal"
+            type="number"
+            class="form-control shadow-none"
+            placeholder=" {{ 'PRODUCTS_TABLE_kcal' | translate }}"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          A
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.a?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="vitaminAIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="a"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="A"
+          />
+        </div>
+      </div>
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          B<sub>1</sub>
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.b1?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="vitaminB1Icon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="b1"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="B1"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          B<sub>2</sub>
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.b2?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="vitaminB2Icon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="b2"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="B2"
+          />
+        </div>
+      </div>
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          PP
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.pp?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="vitaminPPIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="pp"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="PP"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          C
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.c?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="vitaminCIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="c"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="C"
+          />
+        </div>
+      </div>
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          Ca
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.ca?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="calciumIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="ca"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="Ca"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          P
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.p?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="vitaminPPIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="p"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="P"
+          />
+        </div>
+      </div>
+      <div class="form-input col">
+        <div class="form-text text-muted">
+          Fe
+          <span
+            class="required-asterix"
+            *ngIf="productAddForm?.controls?.fe?.errors?.required"
+            >*</span
+          >
+        </div>
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <custom-icon [iconData]="ferrumIcon"></custom-icon>
+            </div>
+          </div>
+          <input
+            formControlName="fe"
+            type="number"
+            class="form-control shadow-none"
+            placeholder="Fe"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,65 @@
+.diet-plan-container {
+  height: 100%;
+  width: 100%;
+}
+
+.diet-plan-container .day-switch {
+  width: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.diet-plan-container .meal-actions {
+  width: 100%;
+}
+
+.diet-plan-container .meal-actions .actions {
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.diet-plan-container .meal-actions .progress-container {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.diet-plan-container .meal-actions .day-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.diet-plan-container .meal-actions .day-name p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.product-list-container {
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 1rem;
+  overflow-y: scroll;
+  height: 90%;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+/*# sourceMappingURL=diet-plan.component.css.map */

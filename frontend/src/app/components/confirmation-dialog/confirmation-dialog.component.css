@@ -1,0 +1,67 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+::ng-deep .mat-dialog-container {
+  min-width: 500px;
+  min-height: 200px;
+}
+
+::ng-deep .mat-dialog-content {
+  font-size: 1.1em;
+}
+
+::ng-deep .mat-dialog-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.sub-text {
+  margin-top: 1.5rem;
+}
+
+.cancel-btn {
+  background-color: #4c6085;
+}
+
+.cancel-btn:hover {
+  background-color: #4c6085 !important;
+  filter: brightness(0.8) !important;
+  -webkit-filter: brightness(0.8) !important;
+}
+
+.yes-btn {
+  background-color: #39a0ed;
+  min-width: 75px;
+}
+/*# sourceMappingURL=confirmation-dialog.component.css.map */

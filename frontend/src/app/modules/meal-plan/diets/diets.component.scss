@@ -1,0 +1,43 @@
+@import "../../../../styles/variables";
+
+.list-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  width: 70%;
+  .diet-item-container {
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+
+    .diet-goal {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+
+    .diet-day-amount {
+      text-align: center;
+    }
+
+    .label {
+      font-size: 0.8em;
+      color: $grey-color;
+      font-style: italic;
+      font-weight: normal;
+    }
+  }
+}
+
+::ng-deep.modal-content {
+  z-index: 1000 !important;
+}
+
+.diet-summary {
+  margin-top: 3rem;
+  font-size: 1.5em;
+
+  .highlight {
+    font-size: 1.2em;
+    color: $accent-color;
+  }
+}

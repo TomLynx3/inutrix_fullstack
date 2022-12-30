@@ -1,0 +1,72 @@
+@import "../../../../styles/variables";
+
+.user-settings {
+  padding: 1rem;
+  width: 350px;
+}
+
+.calories-container {
+  height: 50%;
+  width: 60%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .highlight {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .description {
+    margin-top: 1rem;
+    line-height: 2em;
+    font-style: italic;
+  }
+
+  .AMR {
+    background-color: $accent-color;
+    width: 60%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .amount {
+      font-size: 2em;
+      font-weight: bold;
+    }
+    .label {
+      margin-top: 1rem;
+    }
+
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+  }
+}
+
+::ng-deep .ban-list-container {
+  margin-top: 2.5rem;
+}
+
+@media screen and (max-width: 1600px) {
+  .calories-container {
+    height: 50%;
+    width: 60%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 100px;
+  }
+  .col-6 {
+    width: 60%;
+  }
+}

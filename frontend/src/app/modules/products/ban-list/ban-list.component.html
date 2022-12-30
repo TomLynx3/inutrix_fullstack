@@ -1,0 +1,101 @@
+<div class="ban-list-container">
+  <p class="title">Product Ban List</p>
+  <div class="table-container">
+    <table mat-table [dataSource]="bannedProducts" class="product-ban-list">
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="actions">
+          <div class="action-header-container" (click)="openProductList()">
+            <custom-icon [iconData]="addIcon"></custom-icon>
+            <span class="action-name"> {{ "COMMON_ADD" | translate }}</span>
+          </div>
+          <div
+            class="action-header-container remove"
+            (click)="removeProducts()"
+          >
+            <custom-icon [iconData]="deleteIcon"></custom-icon>
+            <span class="action-name"> {{ "COMMON_REMOVE" | translate }}</span>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let element" class="action-container">
+          <div class="actions">
+            <mat-checkbox
+              [checked]="element.selected"
+              (change)="element.selected = !element.selected"
+            ></mat-checkbox>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "PRODUCTS_TABLE_PRODUCT_NAME" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.name | translate }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="productGroup">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "PRODUCTS_TABLE_PRODUCT_GROUP" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.productGroup.groupName | translate }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <div class="empty-list" *ngIf="bannedProducts.length <= 0">
+      <p>
+        {{ "COMMONT_EMPTY_LIST" | translate }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<ng-template #sidebar>
+  <div class="sidebar-container">
+    <div class="sidebar-header custom-card">
+      {{ "PRODUCTS_BAN_PRODUCT" | translate }}
+    </div>
+    <div class="sidebar-content">
+      <div class="search-container">
+        <div class="form-input">
+          <div class="form-text text-muted">
+            {{ "COMMON_SEARCH" | translate }}
+          </div>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <custom-icon [iconData]="searchIcon"></custom-icon>
+              </div>
+            </div>
+            <input
+              (input)="onSearch($event, productTable)"
+              type="text"
+              class="form-control shadow-none"
+              placeholder="{{
+                'PRODUCTS_SEARCH_FOR_PRODUCT_OR_PRODUCT_GROUP' | translate
+              }}"
+            />
+          </div>
+        </div>
+      </div>
+      <products-table
+        class="product-table"
+        #productTable
+        [ignoreProducts]="bannedProductIds"
+      ></products-table>
+    </div>
+    <div class="sidebar-footer custom-card">
+      <button class="btn btn-primary shadow-none me-2" (click)="close()">
+        {{ "COMMON_CLOSE" | translate }}
+      </button>
+      <button
+        class="btn btn-primary shadow-none me-2"
+        (click)="selectItems(productTable)"
+      >
+        {{ "COMMON_SELECT" | translate }}
+      </button>
+    </div>
+  </div>
+</ng-template>

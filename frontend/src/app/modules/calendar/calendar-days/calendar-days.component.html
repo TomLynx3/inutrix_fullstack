@@ -1,0 +1,21 @@
+<div class="content-container">
+  <div
+    class="carousel-container"
+    [style.margin-top.px]="marginTop"
+    [style.width.px]="cellWidth"
+    [style.margin-top.px]="marginTop"
+  >
+    <div
+      class="day-item"
+      *ngFor="let i of array; let index = index"
+      #element
+      (click)="selectDay(index)"
+      [ngStyle]="calendarImg"
+    >
+      <div class="date">
+        <p>{{ days[index] | dateFormat : "dddd" }}</p>
+        <p>{{ days[index] | dateFormat : "LL" }}</p>
+      </div>
+    </div>
+  </div>
+</div>

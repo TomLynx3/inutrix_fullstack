@@ -1,0 +1,120 @@
+.product-container {
+  margin-top: 3rem;
+  padding: 1rem;
+  // width: 75%;
+  height: 60%;
+
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .consumed-all {
+      margin-top: 2rem;
+      margin-right: 3rem;
+
+      mat-checkbox {
+        font-size: 1.4em;
+        font-weight: bold;
+      }
+    }
+
+    .meal-type-switcher-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      justify-content: space-around;
+      custom-icon {
+        font-size: 35px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      span {
+        font-size: 2em;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .product-list {
+    padding: 1.5rem;
+    margin-right: 2rem;
+    min-height: 100%;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+
+    .list {
+      padding: 0.5rem;
+      max-height: 420px;
+      overflow-y: auto;
+    }
+  }
+
+  .consumed-checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+  .diet-info-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .calories-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      width: 100%;
+      height: 75px;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      -webkit-border-radius: 0.5rem;
+      -moz-border-radius: 0.5rem;
+      -ms-border-radius: 0.5rem;
+      -o-border-radius: 0.5rem;
+    }
+    font-size: 1.2em;
+
+    .diet-goal {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: 1600px) {
+  .product-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    // width: 75%;
+    height: 345px;
+    .product-list {
+      padding: 1.5rem;
+      margin-right: 2rem;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+
+      .list {
+        padding: 0.5rem;
+        max-height: 420px;
+        overflow-y: auto;
+      }
+    }
+  }
+}

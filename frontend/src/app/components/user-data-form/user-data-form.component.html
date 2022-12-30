@@ -1,0 +1,148 @@
+<form [formGroup]="userDataForm">
+  <div class="form-input">
+    <div class="form-text text-muted">
+      {{ "USER_DATA_FORM_BODY_WEIGHT" | translate }}
+      <span
+        class="required-asterix"
+        *ngIf="userDataForm?.controls?.bodyWeight?.errors?.required"
+        >*</span
+      >
+    </div>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <custom-icon [iconData]="scaleIcon"></custom-icon>
+        </div>
+      </div>
+      <input
+        formControlName="bodyWeight"
+        type="number"
+        class="form-control shadow-none"
+        placeholder=" {{
+          'USER_DATA_FORM_BODY_WEIGHT_PLACEHOLDER' | translate
+        }}"
+      />
+    </div>
+  </div>
+
+  <div class="form-input">
+    <div class="form-text text-muted">
+      {{ "USER_DATA_FORM_AGE" | translate }}
+      <span
+        class="required-asterix"
+        *ngIf="userDataForm?.controls?.age?.errors?.required"
+        >*</span
+      >
+    </div>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <custom-icon [iconData]="ageIcon"></custom-icon>
+        </div>
+      </div>
+      <input
+        formControlName="age"
+        type="number"
+        class="form-control shadow-none"
+        placeholder="{{ 'USER_DATA_FORM_AGE' | translate }}"
+      />
+    </div>
+  </div>
+  <div class="form-input">
+    <div class="form-text text-muted">
+      {{ "USER_DATA_FORM_HEIGHT" | translate }}
+      <span
+        class="required-asterix"
+        *ngIf="userDataForm?.controls?.height?.errors?.required"
+        >*</span
+      >
+    </div>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <custom-icon [iconData]="heightIcon"></custom-icon>
+        </div>
+      </div>
+      <input
+        formControlName="height"
+        type="number"
+        class="form-control shadow-none"
+        placeholder="{{ 'USER_DATA_FORM_HEIGHT_PLACEHOLDER' | translate }}"
+      />
+    </div>
+  </div>
+  <div class="form-input">
+    <div class="form-text text-muted">
+      {{ "USER_DATA_FORM_GENDER" | translate }}
+    </div>
+    <div class="input-group mb-2 gender-input">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="genderRadio"
+          (change)="toggleGender('M')"
+          [checked]="gender === 'M'"
+          [style.background]="gender === 'M' ? '#39a0ed' : 'white'"
+        />
+        <label class="form-check-label" for="flexRadioDefault1">
+          <custom-icon [iconData]="maleIcon"></custom-icon>
+          {{ "USER_DATA_FORM_GENDER_MALE" | translate }}
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="genderRadio"
+          [style.background]="gender === 'F' ? '#d215ab' : 'white'"
+          [style.borderColor]="gender === 'F' ? '#d215ab' : 'white'"
+          (change)="toggleGender('F')"
+          [checked]="gender === 'F'"
+        />
+        <label class="form-check-label">
+          <custom-icon [iconData]="femaleIcon"></custom-icon>
+          {{ "USER_DATA_FORM_GENDER_FEMALE" | translate }}
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-input">
+    <div class="form-text text-muted">
+      {{ "USER_DATA_FORM_LEVEL_OF_ACTIVITY" | translate }}
+    </div>
+    <div class="dropdown" dropDown>
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ selectedActivityLevel!.name | translate }}
+      </button>
+      <div class="dropdown-menu">
+        <a
+          class="dropdown-item"
+          dropDownItem
+          *ngFor="let level of activityLevels"
+          (click)="selectLevel(level)"
+        >
+          {{ level.name | translate }}
+        </a>
+      </div>
+    </div>
+    <p class="activity-level-description">
+      {{ selectedActivityLevel!.description | translate }}
+    </p>
+  </div>
+
+  <button
+    class="btn btn-primary w-100 shadown-none mt-3"
+    (click)="submit()"
+    [disabled]="!userDataForm.valid"
+  >
+    {{ btnLabel | translate }}
+  </button>
+</form>

@@ -1,0 +1,14 @@
+.gender-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.activity-level-description {
+  margin-top: 1rem;
+  font-style: italic;
+}
+/*# sourceMappingURL=user-data-form.component.css.map */

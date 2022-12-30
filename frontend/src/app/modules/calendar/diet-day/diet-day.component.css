@@ -1,0 +1,143 @@
+.product-container {
+  margin-top: 3rem;
+  padding: 1rem;
+  height: 60%;
+}
+
+.product-container .center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.product-container .flex-container {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product-container .flex-container .consumed-all {
+  margin-top: 2rem;
+  margin-right: 3rem;
+}
+
+.product-container .flex-container .consumed-all mat-checkbox {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.product-container .flex-container .meal-type-switcher-container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.product-container .flex-container .meal-type-switcher-container custom-icon {
+  font-size: 35px;
+}
+
+.product-container .flex-container .meal-type-switcher-container custom-icon:hover {
+  cursor: pointer;
+}
+
+.product-container .flex-container .meal-type-switcher-container span {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.product-container .product-list {
+  padding: 1.5rem;
+  margin-right: 2rem;
+  min-height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.product-container .product-list .list {
+  padding: 0.5rem;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.product-container .consumed-checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.product-container .diet-info-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-size: 1.2em;
+}
+
+.product-container .diet-info-container .calories-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  width: 100%;
+  height: 75px;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+.product-container .diet-info-container .diet-goal {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+/*# sourceMappingURL=diet-day.component.css.map */

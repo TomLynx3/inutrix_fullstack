@@ -1,0 +1,34 @@
+$main-color: #4c6085;
+$accent-color: #39a0ed;
+$light-color: #f1f1f0;
+$pink-color: #d215ab;
+$error-color: #e61444;
+$success-color: #36f1cd;
+$dark-color: #223542;
+$grey-color: #d1ccbe;
+
+.btn-primary {
+  background-color: $accent-color;
+  font-weight: bold;
+  font-size: 1.1em;
+
+  &:hover {
+    background-color: $accent-color !important;
+    filter: brightness(90%) !important;
+    -webkit-filter: brightness(90%) !important;
+  }
+
+  &:active {
+    background-color: $accent-color !important;
+    filter: brightness(90%) !important;
+    -webkit-filter: brightness(90%) !important;
+  }
+}
+
+.danger {
+  color: $error-color;
+}
+
+.success {
+  color: $success-color;
+}

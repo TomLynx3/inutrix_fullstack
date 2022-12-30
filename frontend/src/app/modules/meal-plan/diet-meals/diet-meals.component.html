@@ -1,0 +1,90 @@
+<div class="meals-container" [formGroup]="currentForm">
+  <div class="row">
+    <div class="col-8">
+      <p class="title">{{ "MEAL_PLAN_MEAL_PRODUCTS" | translate }}</p>
+      <div
+        cdkDropList
+        [cdkDropListData]="products"
+        (cdkDropListDropped)="onDrop($event)"
+        class="meals custom-card"
+        [ngClass]="{ 'drag-and-drop': allowDragAndDrop }"
+      >
+        <div
+          class="product-item-container"
+          *ngFor="let item of products"
+          cdkDrag
+          [cdkDragDisabled]="!allowDragAndDrop"
+          [ngClass]="{ 'dropable-product-item': allowDragAndDrop }"
+        >
+          <div class="row">
+            <div class="col-2">
+              <div
+                class="icon-container custom-card"
+                [ngStyle]="{ 'background-color': item.productGroupIcon.color }"
+              >
+                <custom-icon
+                  [iconData]="item.productGroupIcon.icon"
+                ></custom-icon>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="product-name-container">
+                <div class="product-title">
+                  {{ item.name | translate }}
+                </div>
+                <div
+                  class="product-group"
+                  [ngStyle]="{ color: item.productGroupIcon.color }"
+                >
+                  {{ item.productGroupName | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="amount-container">
+                <div class="form-input">
+                  <div class="input-group">
+                    <input
+                      [formControlName]="item.id"
+                      [readonly]="!allowDragAndDrop"
+                      type="number"
+                      class="form-control shadow-none"
+                      [ngClass]="{
+                        'error-input': currentForm.controls[item.id]?.errors
+                      }"
+                    />
+                  </div>
+                  <div
+                    class="error"
+                    *ngIf="currentForm.controls[item.id]?.errors?.max"
+                  >
+                    <span>
+                      {{ "MEAL_PLAN_MEAL_MAX_ERROR" | translate }}
+                      {{ currentForm.controls[item.id].errors?.max.max }}
+                    </span>
+                  </div>
+                </div>
+                <span class="grams">g</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="meal-type-swicther-container">
+        <custom-icon
+          [iconData]="arrowLeft"
+          (click)="prevMealType()"
+          [ngClass]="{ disabled: currentIndex === 0 }"
+        ></custom-icon>
+        <span>{{ mealType() | translate }}</span>
+        <custom-icon
+          [iconData]="arrowRight"
+          (click)="nextMealType()"
+          [ngClass]="{ disabled: currentIndex >= meals.length - 1 }"
+        ></custom-icon>
+      </div>
+    </div>
+  </div>
+</div>

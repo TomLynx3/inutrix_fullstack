@@ -1,0 +1,8 @@
+version: "1"
+
+services:
+  app:
+    image: inutrix.azurecr.io/inutrix-app:latest
+    container_name: app
+    ports:
+      - "8080:3000"

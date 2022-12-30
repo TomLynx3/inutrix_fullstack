@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACZ,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,aAAa;CAC/B;;AAED,AAAA,2BAA2B,CAAC;EAC1B,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,MAAM;CACnB",
+    "sources": [
+        "user-data-form.component.scss"
+    ],
+    "names": [],
+    "file": "user-data-form.component.css"
+}

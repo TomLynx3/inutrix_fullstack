@@ -1,0 +1,55 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.dropdown button {
+  background-color: #39a0ed;
+  width: 100%;
+  text-align: left;
+}
+.dropdown button:after {
+  position: absolute;
+  font-size: 25px;
+  right: 15px;
+  top: 15px;
+}
+.dropdown button:hover, .dropdown button:active {
+  border: 1px solid #39a0ed;
+  background-color: #39a0ed !important;
+  filter: brightness(0.8) !important;
+  -webkit-filter: brightness(0.8) !important;
+}
+.dropdown .dropdown-menu {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.dropdown .dropdown-menu:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1600px) {
+  .dropdown-menu {
+    height: 100px;
+  }
+}

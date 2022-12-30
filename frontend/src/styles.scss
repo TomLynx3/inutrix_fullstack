@@ -1,0 +1,153 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "~ngx-toastr/toastr";
+@import "./styles/form";
+@import "./styles/navigation";
+@import "./styles/table";
+@import "./styles/actions";
+@import "./styles/dropdown";
+@import "./styles/tabs";
+@import "./styles/product_items";
+@import "./styles//hint-slider";
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: white;
+  background-color: $main-color;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-checkbox {
+  width: 30px;
+
+  .mat-checkbox-inner-container {
+    width: 22px;
+    height: 22px;
+  }
+}
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: $success-color !important;
+}
+.mat-checkbox-ripple .mat-ripple-element {
+  background-color: $success-color !important;
+}
+.mat-checkbox-frame {
+  border-color: white;
+}
+
+// html,
+// body {
+
+// }
+// body {
+//   margin: 0;
+//   font-family: Roboto, "Helvetica Neue", sans-serif;
+// }
+
+.custom-card {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.sidebar-container {
+  color: $dark-color;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .sidebar-header {
+    font-size: 1.1em;
+    font-weight: bold;
+    height: 65px;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+  }
+
+  .sidebar-content {
+    margin-top: 2rem;
+    padding: 1rem;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .sidebar-footer {
+    display: flex;
+    align-items: center;
+    height: 65px;
+    margin-top: auto;
+    background-color: white;
+    justify-content: space-between;
+
+    .btn {
+      margin: 0.5rem;
+    }
+  }
+}
+
+custom-icon {
+  img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+  background: $main-color;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #18789b;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  // background: $accent-color;
+  cursor: pointer;
+  filter: brightness(80);
+  -webkit-filter: brightness(80);
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.3 !important;
+}
+
+.cdk-overlay-pane {
+  z-index: 10000000;
+}
+
+@media screen and (max-width: 1600px) {
+  custom-icon {
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

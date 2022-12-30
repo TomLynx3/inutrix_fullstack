@@ -1,0 +1,78 @@
+<swiper [pagination]="true" class="mySwiper">
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "PRODUCT_TABLE_GENERAL_INFO_1" | translate }}</span
+        >
+      </div>
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "PRODUCT_TABLE_GENERAL_INFO_2" | translate }}</span
+        >
+      </div>
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "PRODUCT_TABLE_GENERAL_INFO_3" | translate }}</span
+        >
+      </div>
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "PRODUCT_TABLE_GENERAL_INFO_4" | translate }}</span
+        >
+      </div>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/products/add_product_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "PRODUCT_TABLE_INFO_ADD_PRODUCT_INFO" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/products/edit_product_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "PRODUCT_TABLE_INFO_EDIT_PRODUCT_INFO" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/products/select_product_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "PRODUCT_TABLE_INFO_DELETE_PRODUCT_SELECTION" | translate }}
+      </p>
+      <img
+        src="assets/images/hints/products/delete_product_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "PRODUCT_TABLE_INFO_DELETE_PRODUCTS" | translate }}
+      </p>
+    </div>
+  </ng-template>
+</swiper>

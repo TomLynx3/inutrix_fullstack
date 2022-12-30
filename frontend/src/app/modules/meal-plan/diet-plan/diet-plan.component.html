@@ -1,0 +1,98 @@
+<div class="diet-plan-container" cdkDropListGroup>
+  <div class="row" style="height: 100%">
+    <div class="col-4" style="height: 90%">
+      <p class="h4">{{ "MEAL_PLAN_PRODUCT_LIST" | translate }}</p>
+      <div class="product-list-container custom-card">
+        <diet-product-list
+          [productListItems]="products"
+          [allowDragAndDrop]="allowMealChange"
+          #productList
+        ></diet-product-list>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="meal-actions action-bar custom-card">
+        <div class="actions">
+          <div
+            class="action-bar-container"
+            (click)="prevDay()"
+            [ngClass]="{ disabled: currentIndex === 0 }"
+          >
+            <custom-icon [iconData]="arrowLeft"></custom-icon>
+            <span>{{ "MEAL_PLAN_PREVIOUS" | translate }}</span>
+          </div>
+          <div class="action-bar-container">
+            <div class="progress-container">
+              {{ currentIndex + 1 }}/{{ diet?.dietDays?.length }}
+            </div>
+          </div>
+          <div
+            class="action-bar-container"
+            (click)="nextDay()"
+            [ngClass]="{ disabled: currentIndex >= diet!.dietDays!.length - 1 }"
+          >
+            <custom-icon [iconData]="arrowRight"></custom-icon>
+            <span>{{ "MEAL_PLAN_NEXT" | translate }}</span>
+          </div>
+          <div
+            class="action-bar-container"
+            *ngIf="!showMeals"
+            (click)="setShowMeals()"
+          >
+            <custom-icon [iconData]="mealsIcon"></custom-icon>
+            <span>{{ "MEAL_PLAN_SHOW_MEALS" | translate }}</span>
+          </div>
+          <div
+            class="action-bar-container"
+            *ngIf="showMeals"
+            (click)="showNutrients()"
+          >
+            <custom-icon
+              [iconData]="nutritionIcon"
+              class="nutrient-icon"
+            ></custom-icon>
+            <span>{{ "MEAL_PLAN_SHOW_NUTRIENTS" | translate }}</span>
+          </div>
+          <div
+            class="action-bar-container"
+            *ngIf="showMeals"
+            (click)="adjustMealProducts()"
+          >
+            <custom-icon
+              [iconData]="adjustIcon"
+              class="nutrient-icon"
+            ></custom-icon>
+            <span *ngIf="!allowMealChange">{{
+              "METAL_PLAN_ADJUST_PRODUCT_LIST" | translate
+            }}</span>
+            <span *ngIf="allowMealChange">{{
+              "MEAL_PLAN_STOP_ADJUST_PRODUCT_LIST" | translate
+            }}</span>
+          </div>
+          <div class="action-bar-container" (click)="saveDiet()">
+            <custom-icon [iconData]="saveIcon"></custom-icon>
+            <span>{{ "MEAL_PLAN_SAVE_DIET" | translate }}</span>
+          </div>
+        </div>
+        <div class="day-name">
+          <p>
+            {{ currentDietDay?.date | dateFormat : "dddd" }}
+            {{ currentDietDay?.date | dateFormat : "LL" }}
+          </p>
+        </div>
+      </div>
+      <diet-day-nutrition
+        [nutritions]="currentDietDay?.dietDayMetadata"
+        [dietDetails]="diet?.dietDetails"
+        *ngIf="!showMeals"
+      ></diet-day-nutrition>
+      <diet-meals
+        [allowDragAndDrop]="allowMealChange"
+        [meals]="currentDietDay?.dietDayMetadata?.meals!"
+        [dailyProducts]="currentDietDay?.dietDayMetadata?.products!"
+        (onValueChange)="onValueChange($event)"
+        *ngIf="showMeals"
+      ></diet-meals>
+    </div>
+  </div>
+</div>

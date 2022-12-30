@@ -1,0 +1,59 @@
+.btn-primary {
+  background-color: #39a0ed;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.btn-primary:hover {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.btn-primary:active {
+  background-color: #39a0ed !important;
+  filter: brightness(90%) !important;
+  -webkit-filter: brightness(90%) !important;
+}
+
+.danger {
+  color: #e61444;
+}
+
+.success {
+  color: #36f1cd;
+}
+
+.box {
+  height: 100vh;
+  width: 100%;
+  background-color: #4c6085;
+}
+
+.box .signup-container {
+  width: 450px;
+  height: 600px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+          box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+}
+
+.box .signup-container .google-sign-in .logo-container {
+  text-align: center;
+}
+
+.box .signup-container .google-sign-in .logo-container .app-name {
+  margin-top: 1.5rem;
+  font-size: 2em;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+}
+
+.box .signup-container .user-data-form-container {
+  width: 70%;
+}
+/*# sourceMappingURL=signup.component.css.map */
