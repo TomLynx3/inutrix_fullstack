@@ -1,7 +1,7 @@
 <div class="action-bar custom-card">
   <div class="action-bar-container" (click)="addNewMealPlan()">
-    <custom-icon [iconData]="addIcon"></custom-icon>
-    <span class="action-text">{{ "COMMON_ADD" | translate }}</span>
+    <custom-icon [iconData]="addIcon" class="success"></custom-icon>
+    <span class="action-text">{{ "COMMON_CREATE" | translate }}</span>
   </div>
   <div class="action-bar-container"></div>
 </div>
@@ -14,7 +14,7 @@
       <diet-plan [diet]="diet" (onDietSave)="saveDiet()"></diet-plan>
     </mat-tab>
     <mat-tab label="{{ 'MEAL_PLAN_DIETS' | translate }}">
-      <diets></diets
+      <diets #diets></diets
     ></mat-tab>
   </mat-tab-group>
 </div>

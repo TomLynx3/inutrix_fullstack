@@ -48,11 +48,11 @@ public class MealsServiceImpl implements MealsService {
     }
 
     @Override
-    public DietDayMetaData getDietDayMetadata() throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
+    public DietDayMetaData getDietDayMetadata(DietGoal goal) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
         Loader.loadNativeLibraries();
         MPSolver solver = MPSolver.createSolver("GLOP");
 
-        Nutrients nutrients  = _getNeededNutrients();
+        Nutrients nutrients  = _getNeededNutrients(goal);
 
         List<ProductDTO> products = _productService.getAllProducts();
 
@@ -176,7 +176,7 @@ public class MealsServiceImpl implements MealsService {
     }
 
     @Override
-    public DietDTO createDiet(int days) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
+    public DietDTO createDiet(int days,DietGoal goal) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
 
         DietDTO dietDTO = new DietDTO();
         List<DietDayDTO> dietDayDTOS = new ArrayList<>();
@@ -184,9 +184,7 @@ public class MealsServiceImpl implements MealsService {
 
         DietDetails details = new DietDetails();
 
-        details.setDietGoal(DietGoal.BALANCEDIET);
-
-
+        details.setDietGoal(goal);
 
 
         for(int i = 0; i<days;i++){
@@ -194,7 +192,7 @@ public class MealsServiceImpl implements MealsService {
 
             ZonedDateTime date =  today.plusDays(i);
 
-            DietDayMetaData day = getDietDayMetadata();
+            DietDayMetaData day = getDietDayMetadata(goal);
             day.setMeals(getMealsForDay(day.getProducts()));
 
             dietDayDTO.setDate(date);
@@ -382,8 +380,14 @@ public class MealsServiceImpl implements MealsService {
 
 
 
-    private Nutrients _getNeededNutrients(){
+    private Nutrients _getNeededNutrients(DietGoal goal){
         double caloriesNeededPerDay = _getAMRrate() * _getMBR();
+
+        if(goal == DietGoal.MUSCLEGROWTH){
+            caloriesNeededPerDay+= 250;
+        }else if(goal == DietGoal.WEIGHTLOSS){
+            caloriesNeededPerDay-= 250;
+        }
 
         //Carbs 4 calories per gram
         //Protein 4 calories per gram

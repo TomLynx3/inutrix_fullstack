@@ -9,9 +9,9 @@ import java.util.UUID;
 public interface MealsService {
 
     // DietDayMetaData getMealPlan() throws IllegalAccessException, InstantiationException;
-     DietDayMetaData getDietDayMetadata() throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException;
+     DietDayMetaData getDietDayMetadata(DietGoal goal) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException;
 
-     DietDTO createDiet(int days) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException;
+     DietDTO createDiet(int days,DietGoal goal) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException;
 
      List<MealDTO> getMealsForDay(List<DailyProduct> products);
 

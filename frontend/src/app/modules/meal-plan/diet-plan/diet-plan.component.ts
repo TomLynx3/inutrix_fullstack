@@ -7,7 +7,7 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
-} from '@angular/core';
+} from "@angular/core";
 import {
   DailyProduct,
   Diet,
@@ -15,20 +15,20 @@ import {
   MealDTO,
   MealService,
   ProductListItem,
-} from 'src/app/services/meal-service/meal.service';
-import * as moment from 'moment';
-import { TranslateService } from '@ngx-translate/core';
-import { CustomIcon, IconFamily } from '@ibabylondev/custom-icon';
-import { ToastrService } from 'ngx-toastr';
-import { DietMealsComponent } from '../diet-meals/diet-meals.component';
-import { DietProductListComponent } from '../diet-product-list/diet-product-list.component';
+} from "src/app/services/meal-service/meal.service";
+import * as moment from "moment";
+import { TranslateService } from "@ngx-translate/core";
+import { CustomIcon, IconFamily } from "@ibabylondev/custom-icon";
+import { ToastrService } from "ngx-toastr";
+import { DietMealsComponent } from "../diet-meals/diet-meals.component";
+import { DietProductListComponent } from "../diet-product-list/diet-product-list.component";
 @Component({
-  selector: 'diet-plan',
-  templateUrl: './diet-plan.component.html',
-  styleUrls: ['./diet-plan.component.scss'],
+  selector: "diet-plan",
+  templateUrl: "./diet-plan.component.html",
+  styleUrls: ["./diet-plan.component.scss"],
 })
 export class DietPlanComponent implements OnInit, OnChanges {
-  @ViewChild('productList')
+  @ViewChild("productList")
   public productList: DietProductListComponent | undefined;
   @Input()
   public diet: Diet | undefined;
@@ -40,34 +40,34 @@ export class DietPlanComponent implements OnInit, OnChanges {
   public currentDietDay: DietDay | undefined;
   public arrowLeft: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'arrow-left'],
+    value: ["fas", "arrow-left"],
   };
 
   public arrowRight: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'arrow-right'],
+    value: ["fas", "arrow-right"],
   };
   public calendar: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'calendar-days'],
+    value: ["fas", "calendar-days"],
   };
   public mealsIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'bowl-food'],
+    value: ["fas", "bowl-food"],
   };
   public nutritionIcon: CustomIcon = {
     iconFamily: IconFamily.PNG,
-    value: 'assets/images/diet.png',
+    value: "assets/images/diet.png",
   };
 
   public adjustIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'bars-staggered'],
+    value: ["fas", "bars-staggered"],
   };
 
   public saveIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'floppy-disk'],
+    value: ["fas", "floppy-disk"],
   };
 
   public showMeals: boolean = true;
@@ -133,11 +133,11 @@ export class DietPlanComponent implements OnInit, OnChanges {
     this._initCurrentDietDay();
 
     const tranItem = this.allowMealChange
-      ? 'MEAL_PLAN_MEAL_ADJUSTMENT_ALLOWED'
-      : 'MEAL_PLAN_MEAL_ADJUSTMENT_STOPPED';
+      ? "MEAL_PLAN_MEAL_ADJUSTMENT_ALLOWED"
+      : "MEAL_PLAN_MEAL_ADJUSTMENT_STOPPED";
 
     this._translateService.get(tranItem).subscribe((tran: string) => {
-      this._toastService.info(tran, '', { timeOut: 5000 });
+      this._toastService.info(tran, "", { timeOut: 5000 });
     });
   }
 
@@ -196,6 +196,7 @@ export class DietPlanComponent implements OnInit, OnChanges {
   }
 
   public saveDiet() {
+    let error = false;
     if (this.diet) {
       for (let i = 0; i < this.diet?.dietDays.length; i++) {
         const currentDietDay = this.diet.dietDays[i];
@@ -209,18 +210,21 @@ export class DietPlanComponent implements OnInit, OnChanges {
 
         for (let product of products) {
           if (product.amount !== 0) {
+            error = true;
             this._translateService
-              .get('MEAL_PLAN_CANT_SAVE_DIET')
+              .get("MEAL_PLAN_CANT_SAVE_DIET")
               .subscribe((trans: string) => {
                 this._toastService.error(trans);
                 return;
               });
+          } else {
           }
         }
       }
     }
-
-    this.onDietSave.emit();
+    if (!error) {
+      this.onDietSave.emit();
+    }
   }
 }
 

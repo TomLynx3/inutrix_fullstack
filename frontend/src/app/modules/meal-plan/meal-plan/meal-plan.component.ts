@@ -1,6 +1,8 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatTabGroup } from '@angular/material/tabs';
-import { CustomIcon, IconFamily } from '@ibabylondev/custom-icon';
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { MatTabGroup } from "@angular/material/tabs";
+import { CustomIcon, IconFamily } from "@ibabylondev/custom-icon";
+import { TranslateService } from "@ngx-translate/core";
+import { ToastrService } from "ngx-toastr";
 import {
   BalancedDietDetails,
   Diet,
@@ -10,19 +12,21 @@ import {
   MealDTO,
   MealService,
   MealType,
-} from 'src/app/services/meal-service/meal.service';
+} from "src/app/services/meal-service/meal.service";
 // import { Translate } from 'src/app/utilities/tools';
-import { SidemodalService } from '../../sidemodal/services/sidemodal.service';
+import { SidemodalService } from "../../sidemodal/services/sidemodal.service";
+import { DietsComponent } from "../diets/diets.component";
 
 @Component({
-  selector: 'app-meal-plan',
-  templateUrl: './meal-plan.component.html',
-  styleUrls: ['./meal-plan.component.scss'],
+  selector: "app-meal-plan",
+  templateUrl: "./meal-plan.component.html",
+  styleUrls: ["./meal-plan.component.scss"],
 })
 // @Translate({ en: require('../i18n/meal-plan.en.json') })
 export class MealPlanComponent implements OnInit {
-  @ViewChild('sidebar') public sideBar: TemplateRef<any> | undefined;
-  @ViewChild('tabs') public tabs: MatTabGroup | undefined;
+  @ViewChild("sidebar") public sideBar: TemplateRef<any> | undefined;
+  @ViewChild("tabs") public tabs: MatTabGroup | undefined;
+  @ViewChild("diets") public diets: DietsComponent | undefined;
 
   public days: number[] = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -33,14 +37,16 @@ export class MealPlanComponent implements OnInit {
 
   public addIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'plus'],
+    value: ["fas", "plus"],
   };
 
   public selectedDayAmount = 1;
 
   constructor(
     private readonly _sidebarModal: SidemodalService,
-    private readonly _mealService: MealService
+    private readonly _mealService: MealService,
+    private readonly _translateService: TranslateService,
+    private readonly _toastService: ToastrService
   ) {}
 
   ngOnInit(): void {}
@@ -50,7 +56,7 @@ export class MealPlanComponent implements OnInit {
 
   public addNewMealPlan() {
     if (this.sideBar) {
-      this._sidebarModal.open(this.sideBar, '800px');
+      this._sidebarModal.open(this.sideBar, "800px");
     }
   }
 
@@ -81,7 +87,15 @@ export class MealPlanComponent implements OnInit {
 
   public saveDiet() {
     this._mealService.saveDiet(this.diet!).subscribe((res) => {
-      console.log(res);
+      if (res.success) {
+        this._translateService
+          .get("MEAL_PLAN_DIET_SAVED")
+          .subscribe((tran: string) => {
+            this._toastService.success(tran);
+            this.diets?.fetchDiets();
+            this.diet = undefined;
+          });
+      }
     });
   }
 

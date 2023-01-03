@@ -12,6 +12,7 @@ import { CustomIcon, IconFamily } from "@ibabylondev/custom-icon";
 import { ConfirmationDialogComponent } from "src/app/components/confirmation-dialog/confirmation-dialog.component";
 import { MenuService } from "src/app/services/menu/menu.service";
 import SwiperCore, { Pagination } from "swiper";
+import { MealPlanHintPageComponent } from "../../meal-plan/meal-plan-hint-page/meal-plan-hint-page.component";
 import { ProductsHintPageComponent } from "../../products/products-hint-page/products-hint-page.component";
 import { SettingsHintsPageComponent } from "../settings/settings-hints-page/settings-hints-page.component";
 
@@ -134,6 +135,8 @@ export class BaseComponent implements OnInit {
       component = ProductsHintPageComponent;
     } else if (this.currentPage?.route == "/settings") {
       component = SettingsHintsPageComponent;
+    } else if (this.currentPage?.route == "/meal-plans") {
+      component = MealPlanHintPageComponent;
     }
 
     if (component) {
