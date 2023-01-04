@@ -13,7 +13,7 @@ public interface MealsService {
 
      DietDTO createDiet(int days,DietGoal goal) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException;
 
-     List<MealDTO> getMealsForDay(List<DailyProduct> products);
+     List<MealDTO> getMealsForDay(List<DailyProduct> products) throws SolverErrorCodes.SolutionNotFoundException;
 
      UUID saveDiet(DietDTO diet);
 

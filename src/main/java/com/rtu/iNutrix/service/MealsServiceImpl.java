@@ -60,7 +60,7 @@ public class MealsServiceImpl implements MealsService {
 
 
         for(ProductDTO product : products){
-            map.put(product,solver.makeNumVar(0.0,4,product.getName()));
+           if (!product.isBanned()) map.put(product,solver.makeNumVar(0.0,4,product.getName()));
         }
 
 
@@ -216,7 +216,7 @@ public class MealsServiceImpl implements MealsService {
     }
 
     @Override
-    public List<MealDTO> getMealsForDay(List<DailyProduct> products) {
+    public List<MealDTO> getMealsForDay(List<DailyProduct> products) throws SolverErrorCodes.SolutionNotFoundException {
        Loader.loadNativeLibraries();
         class ProductHelper {
             DailyProduct dailyProduct;
@@ -275,7 +275,7 @@ public class MealsServiceImpl implements MealsService {
         if (resultStatusBreakfast == MPSolver.ResultStatus.OPTIMAL || resultStatusBreakfast == MPSolver.ResultStatus.FEASIBLE){
             for (ProductHelper productHelper : productHelperList) productHelper.productAmountUsed[0] = productHelper.mpVariable.solutionValue();
         }
-        else return null;
+        else throw new SolverErrorCodes.SolutionNotFoundException();
         solver.clear();
 
         // lunch
@@ -303,7 +303,7 @@ public class MealsServiceImpl implements MealsService {
         if (resultStatusLunch == MPSolver.ResultStatus.OPTIMAL || resultStatusLunch == MPSolver.ResultStatus.FEASIBLE){
             for (ProductHelper productHelper: productHelperList) productHelper.productAmountUsed[1] = productHelper.mpVariable.solutionValue();
         }
-        else return null;
+        else throw new SolverErrorCodes.SolutionNotFoundException();
 
         // dinner
         // All remaining unused products are used for dinner
