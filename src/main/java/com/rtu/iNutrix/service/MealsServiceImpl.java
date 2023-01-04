@@ -53,7 +53,7 @@ public class MealsServiceImpl implements MealsService {
     public DietDayMetaData getDietDayMetadata() throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
         Loader.loadNativeLibraries();
         CpModel model = new CpModel();
-        final double MODEL_SCALING_MULTIPLIER = 10; //100g * 0.1 = 10g
+        final double MODEL_SCALING_MULTIPLIER = 1.2;
 
         Nutrients nutrients  = _getNeededNutrients();
 
@@ -108,7 +108,7 @@ public class MealsServiceImpl implements MealsService {
         Constraint carbs = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(),1)), (long) nutrients.getCarbohydrates().getMinimumValue(), (long) nutrients.getCarbohydrates().getMaximumValue());
         Constraint fat = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 2)), (long) nutrients.getFat().getMinimumValue(), (long) nutrients.getFat().getMaximumValue());
         Constraint kcal = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 3)), (long) nutrients.getKcal().getMinimumValue(), (long) nutrients.getKcal().getMaximumValue());
-        /*Constraint A = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 4)), (long) nutrients.getA().getMinimumValue(), (long) nutrients.getA().getMaximumValue());
+        Constraint A = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 4)), (long) nutrients.getA().getMinimumValue(), (long) nutrients.getA().getMaximumValue());
         Constraint B1 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 5)), (long) nutrients.getB1().getMinimumValue(), (long) nutrients.getB1().getMaximumValue());
         Constraint B2 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 6)), (long) nutrients.getB2().getMinimumValue(), (long) nutrients.getB2().getMaximumValue());
         Constraint PP = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 7)), (long) nutrients.getPP().getMinimumValue(), (long) nutrients.getPP().getMaximumValue());
@@ -116,7 +116,7 @@ public class MealsServiceImpl implements MealsService {
         Constraint Ca = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 9)), (long) nutrients.getCa().getMinimumValue(), (long) nutrients.getCa().getMaximumValue());
         Constraint P = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 10)), (long) nutrients.getP().getMinimumValue(), (long) nutrients.getP().getMaximumValue());
         Constraint Fe = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 11)), (long) nutrients.getFe().getMinimumValue(), (long) nutrients.getFe().getMaximumValue());
-        */
+
 
         CpSolver solver = new CpSolver();
         CpSolverStatus resultStatus = solver.solve(model);
