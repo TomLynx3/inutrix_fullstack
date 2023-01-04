@@ -53,5 +53,6 @@
   "MEAL_PLAN_HINT_DIET_INFO_MEAL_LIST_ADJUST": "User can adjust product list in meals. To enter into adjust mode user need to press button on the control bar",
   "MEAL_PLAN_HINT_DIET_INFO_MEAL_LIST_ADJUST_MODE": "To add products to meal list just drag and drop products from product list into meal products or reverse if you need to remove. When adjustment is done press STOP ADJUST MEAL PRODUCTS on the control bar.",
   "MEAL_PLAN_HINT_DIET_INFO_SAVE_DIET": "Last step is to save diet this can be done by pressing SAVE DIET button on the control bar. If user was trying to adjust meal products manually make sure that all products are distributed over meals.",
-  "MEAL_PLAN_HINT_DIET_INFO_SET_ACTIVE_DIET": "After user saved diet user can choose it as active diet by clicking button next to diet in the diets list. After button is pressed window from the right side will appear where user can select date from which diet will start."
+  "MEAL_PLAN_HINT_DIET_INFO_SET_ACTIVE_DIET": "After user saved diet user can choose it as active diet by clicking button next to diet in the diets list. After button is pressed window from the right side will appear where user can select date from which diet will start.",
+  "MEAL_PLAN_NO_SULUTION": "Diet cannot be created. Most likely you put too many products in the ban list"
 }

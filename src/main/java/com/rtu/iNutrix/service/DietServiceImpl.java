@@ -110,7 +110,7 @@ public class DietServiceImpl implements DietService {
                     boolean consumed = false;
 
                     if(dateProgress.isPresent()){
-                        DietProgress value = dateProgress.get(); 
+                        DietProgress value = dateProgress.get();
                         consumed = value.getConsumedProducts().stream().anyMatch(x->base.getProductId().equals(x.getProductId()) && x.getMealType().equals(innerEntry.getKey()));
                     }
                     DietProgressProductDTO dto = new DietProgressProductDTO(base,consumed);

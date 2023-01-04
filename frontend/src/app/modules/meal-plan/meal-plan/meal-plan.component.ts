@@ -81,6 +81,12 @@ export class MealPlanComponent implements OnInit {
             }
           }, 200);
           this._sidebarModal.close();
+        } else if (!res.success && res.error && res.error.errorCode === "S-1") {
+          this._translateService
+            .get("MEAL_PLAN_NO_SULUTION")
+            .subscribe((tranx: string) => {
+              this._toastService.error(tranx);
+            });
         }
       });
   }
