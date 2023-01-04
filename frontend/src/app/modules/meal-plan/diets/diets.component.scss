@@ -41,3 +41,17 @@
     color: $accent-color;
   }
 }
+
+
+@media screen and (max-width: 1600px) {
+  .list-container {
+    height: 90%;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .list-container {
+    width: 80%;
+    height: 90%;
+  }
+}
+
