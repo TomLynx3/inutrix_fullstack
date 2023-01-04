@@ -1,0 +1,27 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exit-icon {
+  margin-right: 2rem;
+
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  span {
+    font-size: 12px;
+  }
+
+  custom-icon {
+    font-size: 25px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

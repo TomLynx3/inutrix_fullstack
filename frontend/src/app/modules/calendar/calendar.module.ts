@@ -9,9 +9,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
+import { CalendarHintsComponent } from './calendar-hints/calendar-hints.component';
 
 @NgModule({
-  declarations: [CalendarComponent, CalendarDaysComponent, DietDayComponent],
+  declarations: [CalendarComponent, CalendarDaysComponent, DietDayComponent, CalendarHintsComponent],
   imports: [
     CommonModule,
     CalendartRoutingModule,

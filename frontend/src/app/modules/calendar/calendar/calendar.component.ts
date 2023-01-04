@@ -102,7 +102,8 @@ export class CalendarComponent implements OnInit {
     if (progress) {
       for (let product of dietProgress.products) {
         const productInList = progress.products.find(
-          (x) => x.productId === product.productId
+          (x) =>
+            x.productId === product.productId && x.mealType === product.mealType
         );
 
         if (productInList) {

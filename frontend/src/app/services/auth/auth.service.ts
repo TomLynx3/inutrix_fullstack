@@ -1,23 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseResponse } from 'src/app/utilities/types';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserData } from '../user-settings/user-settings.service';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { BaseResponse } from "src/app/utilities/types";
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { UserData } from "../user-settings/user-settings.service";
+import { Router } from "@angular/router";
+import { SocialAuthService } from "@abacritt/angularx-social-login";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
-  private readonly _controllerURL: string = '/api/auth';
+  private readonly _controllerURL: string = "/api/auth";
 
   constructor(
     private readonly _http: HttpClient,
-    private readonly _jwtHelper: JwtHelperService
+    private readonly _jwtHelper: JwtHelperService,
+    private readonly _router: Router,
+    private readonly _google: SocialAuthService
   ) {}
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token !== null && token !== undefined) {
       return !this._jwtHelper.isTokenExpired(token);
     }
@@ -25,11 +29,19 @@ export class AuthService {
   }
 
   public saveToken(token: string) {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   }
 
   public getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
+  }
+
+  public logout() {
+    this._google.signOut().then(() => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("route");
+      this._router.navigate(["/authenticate"]);
+    });
   }
 
   public signIn(token: string): Observable<AuthResponse> {

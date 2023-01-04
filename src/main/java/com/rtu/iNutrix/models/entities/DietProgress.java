@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,8 +27,6 @@ public class DietProgress extends BaseEntity{
     @JoinColumn(name = "diet_history_id")
     private DietHistory dietHistory;
 
-    @ElementCollection
-    @CollectionTable(name = "`DietProgressProducts`", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "products")
-    private List<String> products;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dietProgress")
+    private Set<ConsumedProduct> consumedProducts;
 }

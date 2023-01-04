@@ -164,6 +164,7 @@ export class DietDayComponent implements OnInit, OnChanges {
       productsToUpdate.push(<ConsumedProduct>{
         productId: product.productId,
         consumed: product.consumed,
+        mealType: product.mealType,
       });
     }
 
@@ -182,6 +183,7 @@ export class DietDayComponent implements OnInit, OnChanges {
     const consumedProduct = <ConsumedProduct>{
       productId: product.id,
       consumed: product.consumed,
+      mealType: product.mealType,
     };
 
     this.onConsume.emit({ date: this.date!, products: [consumedProduct] });

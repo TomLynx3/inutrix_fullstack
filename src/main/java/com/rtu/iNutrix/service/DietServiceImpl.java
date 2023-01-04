@@ -7,14 +7,12 @@ import com.rtu.iNutrix.models.DTO.Products.ProductBase;
 import com.rtu.iNutrix.models.DTO.Products.ProductDTO;
 import com.rtu.iNutrix.models.DTO.Products.ProductInfoDTO;
 import com.rtu.iNutrix.models.entities.*;
-import com.rtu.iNutrix.repositories.DietHistoryRepository;
-import com.rtu.iNutrix.repositories.DietProductRepository;
-import com.rtu.iNutrix.repositories.DietProgressRepository;
-import com.rtu.iNutrix.repositories.DietRepository;
+import com.rtu.iNutrix.repositories.*;
 import com.rtu.iNutrix.service.interfaces.DietService;
 import com.rtu.iNutrix.service.interfaces.ProductsService;
 import com.rtu.iNutrix.service.interfaces.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 
@@ -40,17 +38,20 @@ public class DietServiceImpl implements DietService {
 
     private  final DietRepository _dietRepo;
 
+    private  final ConsumedProductRepository _consumedProductRepo;
+
 
     @Autowired
     public DietServiceImpl(UserDataService userDataService, DietHistoryRepository dietHistoryRepository,
                            DietProgressRepository dietProgressRepository, DietProductRepository dietProductRepository,
-                           ProductsService productsService,DietRepository dietRepo){
+                           ProductsService productsService,DietRepository dietRepo, ConsumedProductRepository consumedProductRepository){
         this._userDataService = userDataService;
         this._dietHistoryRepo = dietHistoryRepository;
         this._dietProgressRepo = dietProgressRepository;
         this._dietProductRepo = dietProductRepository;
         this._productService = productsService;
         this._dietRepo = dietRepo;
+        this._consumedProductRepo = consumedProductRepository;
     }
 
     @Override
@@ -94,35 +95,37 @@ public class DietServiceImpl implements DietService {
 
             progressDay.setDate(firsDate.plusDays(index));
 
+            Map<MealType,List<DietProduct>> groupedByMealType = entry.getValue().stream().collect(Collectors.groupingBy(x->x.getMealType()));
+
             List<DietProgressProductDTO> progressProductDTOList = new ArrayList<>();
+            for(Map.Entry<MealType,List<DietProduct>> innerEntry: groupedByMealType.entrySet()){
 
-            List<ProductBase> productBases = _productService.getProductBases(entry.getValue());
 
+                List<ProductBase> productBases = _productService.getProductBases(innerEntry.getValue());
 
-            for(ProductBase base : productBases){
+                for(ProductBase base : productBases){
 
-                Optional<DietProgress> dateProgress = currentDietProgress.stream().filter(x->x.getDate().truncatedTo(ChronoUnit.DAYS).equals(entry.getKey().truncatedTo(ChronoUnit.DAYS))).findFirst();
+                    Optional<DietProgress> dateProgress = currentDietProgress.stream().filter(x->x.getDate().truncatedTo(ChronoUnit.DAYS).equals(entry.getKey().truncatedTo(ChronoUnit.DAYS))).findFirst();
 
-                boolean consumed = false;
+                    boolean consumed = false;
 
-                if(dateProgress.isPresent()){
-                    DietProgress value = dateProgress.get();
+                    if(dateProgress.isPresent()){
+                        DietProgress value = dateProgress.get(); 
+                        consumed = value.getConsumedProducts().stream().anyMatch(x->base.getProductId().equals(x.getProductId()) && x.getMealType().equals(innerEntry.getKey()));
+                    }
+                    DietProgressProductDTO dto = new DietProgressProductDTO(base,consumed);
+                    dto.setMealType(innerEntry.getKey());
 
-                    consumed = value.getProducts().stream().anyMatch(x-> UUID.fromString(x).equals(base.getProductId()));
+                    _setDietProductAmount(innerEntry.getValue(),base.getProductId(),dto);
+
+                    progressProductDTOList.add(dto);
 
                 }
-                DietProgressProductDTO dto = new DietProgressProductDTO(base,consumed);
-                _setDietProductAmountAndMealType(currentDietProducts,base.getProductId(),dto);
-
-                progressProductDTOList.add(dto);
-
+                progressDay.setProducts(progressProductDTOList);
             }
 
-
-           progressDay.setProducts(progressProductDTOList);
-           progressDays.add(progressDay);
-           index++;
-
+            progressDays.add(progressDay);
+            index++;
         }
 
         
@@ -139,24 +142,37 @@ public class DietServiceImpl implements DietService {
 
         List<DietProgress> progressesToUpdate = new ArrayList<>();
 
+        List<ConsumedProduct> consumedProductsToUpdate = new ArrayList<>();
+        List<ConsumedProduct> consumedProductsToRemove = new ArrayList<>();
+
         for(UpdateProgressDayDTO dto : progress.getProgress()){
 
             Optional<DietProgress> progressDay = dietProgresses.stream().filter(x->x.getDate().toInstant().atZone(ZoneId.systemDefault()).truncatedTo(ChronoUnit.DAYS).toEpochSecond() == dto.getDate().toInstant().atZone(ZoneId.systemDefault()).truncatedTo(ChronoUnit.DAYS).toEpochSecond()).findFirst();
 
             if(progressDay.isPresent()){
-                List<String> products = progressDay.get().getProducts();
+                List<ConsumedProduct> consumedProducts = progressDay.get().getConsumedProducts().stream().toList();
 
-                for(ConsumedProductDTO product : dto.getProducts()){
-
-                    Optional<String> productInList = products.stream().filter(x->x.equals(product.getProductId().toString())).findFirst();
+                for(ConsumedProductDTO product : dto.getProducts()) {
+                    Optional<ConsumedProduct> productInList = consumedProducts .stream().filter(x->x.getProductId().equals(product.getProductId()) && product.getMealType().equals(x.getMealType())).findFirst();
 
                     if(product.isConsumed() && productInList.isEmpty()){
-                        products.add(product.getProductId().toString());
+                        ConsumedProduct newProduct = new ConsumedProduct();
+
+                        newProduct.setProductId(product.getProductId());
+
+                        newProduct.setMealType(product.getMealType());
+
+                        newProduct.setDietProgress(progressDay.get());
+
+                        consumedProductsToUpdate.add(newProduct);
+
+
                     }else if(productInList.isPresent() && !product.isConsumed()){
-                        products.remove(productInList.get());
+                        consumedProductsToRemove.add(productInList.get());
                     }
                 }
                 progressesToUpdate.add(progressDay.get());
+
             }else{
                 DietProgress dietProgress = new DietProgress();
 
@@ -168,14 +184,17 @@ public class DietServiceImpl implements DietService {
 
                 dietProgress.setDietHistory(diet);
 
-                dietProgress.setProducts(dto.getProducts().stream().filter(x->x.isConsumed()).map(x->x.getProductId().toString()).collect(Collectors.toList()));
+                dietProgress.setConsumedProducts(dto.getProducts().stream().filter(x->x.isConsumed()).map(x->new ConsumedProduct(x,dietProgress)).collect(Collectors.toSet()));
 
                 progressesToUpdate.add(dietProgress);
             }
 
-        }
 
+        }
         _dietProgressRepo.saveAll(progressesToUpdate);
+        _consumedProductRepo.saveAll(consumedProductsToUpdate);
+        _consumedProductRepo.deleteAll(consumedProductsToRemove);
+
     }
 
     @Override
@@ -229,18 +248,16 @@ public class DietServiceImpl implements DietService {
     }
 
 
-    private void _setDietProductAmountAndMealType(List<DietProduct> products, UUID productId,DietProgressProductDTO dto){
+    private void _setDietProductAmount(List<DietProduct> products, UUID productId,DietProgressProductDTO dto){
         Optional<DietProduct> dietProduct = products.stream().filter(x->x.getProductId().equals(productId)).findFirst();
 
         if(dietProduct.isPresent()){
             DietProduct value = dietProduct.get();
 
-            dto.setMealType(value.getMealType());
             dto.setAmount(value.getAmount());
         }
 
     }
-
 
     private boolean _checkIfDietFinished(DietHistory dietHistory){
         return dietHistory.getToDate().isBefore(ZonedDateTime.now(ZoneOffset.UTC));

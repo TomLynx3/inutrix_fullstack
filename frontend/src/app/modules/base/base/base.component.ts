@@ -10,8 +10,10 @@ import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { CustomIcon, IconFamily } from "@ibabylondev/custom-icon";
 import { ConfirmationDialogComponent } from "src/app/components/confirmation-dialog/confirmation-dialog.component";
+import { AuthService } from "src/app/services/auth/auth.service";
 import { MenuService } from "src/app/services/menu/menu.service";
 import SwiperCore, { Pagination } from "swiper";
+import { CalendarHintsComponent } from "../../calendar/calendar-hints/calendar-hints.component";
 import { MealPlanHintPageComponent } from "../../meal-plan/meal-plan-hint-page/meal-plan-hint-page.component";
 import { ProductsHintPageComponent } from "../../products/products-hint-page/products-hint-page.component";
 import { SettingsHintsPageComponent } from "../settings/settings-hints-page/settings-hints-page.component";
@@ -42,7 +44,8 @@ export class BaseComponent implements OnInit {
   constructor(
     private readonly _router: Router,
     private readonly _menuService: MenuService,
-    private readonly _dialog: MatDialog
+    private readonly _dialog: MatDialog,
+    private readonly _authService: AuthService
   ) {}
 
   //need add current menu item
@@ -54,6 +57,11 @@ export class BaseComponent implements OnInit {
   public infoIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
     value: ["fas", "circle-info"],
+  };
+
+  public exitIcon: CustomIcon = {
+    iconFamily: IconFamily.FONTAWESOME,
+    value: ["fas", "door-closed"],
   };
 
   public userMenu: UserMenuItem[] = [
@@ -137,6 +145,8 @@ export class BaseComponent implements OnInit {
       component = SettingsHintsPageComponent;
     } else if (this.currentPage?.route == "/meal-plans") {
       component = MealPlanHintPageComponent;
+    } else if (this.currentPage?.route == "/calendar") {
+      component = CalendarHintsComponent;
     }
 
     if (component) {
@@ -144,6 +154,10 @@ export class BaseComponent implements OnInit {
         panelClass: "hints-dialog",
       });
     }
+  }
+
+  public logout() {
+    this._authService.logout();
   }
 }
 
