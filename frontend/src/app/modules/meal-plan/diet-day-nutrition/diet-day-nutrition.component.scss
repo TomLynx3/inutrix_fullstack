@@ -66,3 +66,33 @@
     overflow: auto;
   }
 }
+
+@media screen and (max-width: 1400px) {
+  .details-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+    .calories-container {
+      width: 35%;
+      max-width: 350px;
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      border-radius: 0.5rem;
+      -webkit-border-radius: 0.5rem;
+      -moz-border-radius: 0.5rem;
+      -ms-border-radius: 0.5rem;
+      -o-border-radius: 0.5rem;
+  
+      .text {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+      }
+    }
+  }
+}

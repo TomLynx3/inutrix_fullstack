@@ -110,3 +110,29 @@
     }
   }
 }
+
+
+@media screen and (max-width: 1400px) {
+  .ban-list-container {
+    margin-left: 132px;
+    .product-ban-list {
+      overflow: hidden;
+      min-width: 600px;
+
+      max-height: 200px;
+      min-height: 200px;
+      overflow-y: scroll;
+    }
+  }
+  .sidebar-content {
+    min-height: 550px;
+    .product-table {
+      height: 100%;
+      ::ng-deep table {
+        .mat-header-cell {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}

@@ -55,10 +55,19 @@
 }
 
 @media screen and (max-width: 1600px) {
+  .content-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+
+    flex-direction: column;
+  }
+
   .carousel-container {
     margin-left: 1rem;
 
-    margin-left: 600px;
+    margin-left: 620px;
     margin-right: auto;
     display: flex;
     .day-item {
