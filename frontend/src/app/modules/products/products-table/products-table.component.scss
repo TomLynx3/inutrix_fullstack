@@ -25,3 +25,15 @@
     width: auto;
   }
 }
+
+@media screen and (max-width: 1400px) {
+  .select-all-container {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 130px;
+    text-align: center;
+    font-size: 0;
+    padding: 0;
+
+  }
+}

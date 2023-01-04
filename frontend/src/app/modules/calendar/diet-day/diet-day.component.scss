@@ -99,21 +99,104 @@
 
 @media screen and (max-width: 1600px) {
   .product-container {
-    margin-top: 1.5rem;
+    margin-top: 0.7rem;
     padding: 1rem;
     // width: 75%;
-    height: 300px;
+    .sm-col-3 {
+      width: 17%;
+      margin-left: 90px;
+    }
     .product-list {
       padding: 1.5rem;
       margin-right: 2rem;
       height: 220px;
       display: flex;
       flex-direction: column;
+      width: 670px;
+
 
       .list {
         padding: 0.5rem;
         max-height: 420px;
         overflow-y: auto;
+      }
+    }
+    .diet-info-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .calories-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1em;
+        font-weight: bold;
+        width: 100%;
+        height: 75px;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+        -webkit-border-radius: 0.5rem;
+        -moz-border-radius: 0.5rem;
+        -ms-border-radius: 0.5rem;
+        -o-border-radius: 0.5rem;
+      }
+      font-size: 1.2em;
+  
+      .diet-goal {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .product-container {
+    margin-top: 0.7rem;
+    padding: 1rem;
+    // width: 75%;
+    .sm-col-3 {
+      width: 17%;
+      margin-left: 70px;
+    }
+    .product-list {
+      padding: 1.5rem;
+      margin-right: 2rem;
+      height: 220px;
+      display: flex;
+      flex-direction: column;
+      width: 580px;
+
+      .list {
+        padding: 0.5rem;
+        max-height: 420px;
+        overflow-y: auto;
+      }
+    }
+    .diet-info-container {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .calories-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1em;
+        font-weight: bold;
+        width: 100%;
+        height: 75px;
+        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+        -webkit-border-radius: 0.5rem;
+        -moz-border-radius: 0.5rem;
+        -ms-border-radius: 0.5rem;
+        -o-border-radius: 0.5rem;
+      }
+      font-size: 1.2em;
+  
+      .diet-goal {
+        font-size: 1.3em;
+        font-weight: bold;
       }
     }
   }
