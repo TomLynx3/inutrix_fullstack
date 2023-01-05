@@ -53,7 +53,8 @@ public class MealsServiceImpl implements MealsService {
     public DietDayMetaData getDietDayMetadata() throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
         Loader.loadNativeLibraries();
         CpModel model = new CpModel();
-        final double MODEL_SCALING_MULTIPLIER = 1.2;
+        final double MODEL_SCALING_MULTIPLIER = 10;
+        final int MODEL_NUTRITION_MULTIPLIER = 100;
 
         Nutrients nutrients  = _getNeededNutrients();
 
@@ -88,34 +89,34 @@ public class MealsServiceImpl implements MealsService {
         for (Map.Entry<ProductDTO, IntVar> entry : map.entrySet()) {
             intVarsAll[i] = entry.getValue();
             long[] arrayRow = productNutrientsCoefficientsArray[i];
-            arrayRow[0] = Math.round(entry.getKey().getProtein() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[1] = Math.round(entry.getKey().getCarbohydrates() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[2] = Math.round(entry.getKey().getFat() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[3] = Math.round(entry.getKey().getKcal() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[4] = Math.round(entry.getKey().getA() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[5] = Math.round(entry.getKey().getB1() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[6] = Math.round(entry.getKey().getB2() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[7] = Math.round(entry.getKey().getPP() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[8] = Math.round(entry.getKey().getC() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[9] = Math.round(entry.getKey().getCa() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[10] = Math.round(entry.getKey().getP() / MODEL_SCALING_MULTIPLIER);
-            arrayRow[11] = Math.round(entry.getKey().getFe() / MODEL_SCALING_MULTIPLIER);
+            arrayRow[0] = Math.round(entry.getKey().getProtein() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[1] = Math.round(entry.getKey().getCarbohydrates() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[2] = Math.round(entry.getKey().getFat() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[3] = Math.round(entry.getKey().getKcal() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[4] = Math.round(entry.getKey().getA() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[5] = Math.round(entry.getKey().getB1() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[6] = Math.round(entry.getKey().getB2() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[7] = Math.round(entry.getKey().getPP() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[8] = Math.round(entry.getKey().getC() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[9] = Math.round(entry.getKey().getCa() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[10] = Math.round(entry.getKey().getP() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[11] = Math.round(entry.getKey().getFe() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
             i++;
         }
 
 
-        Constraint protein = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll,_getColumnFromArray(productNutrientsCoefficientsArray,map.size(),0)), (long) nutrients.getProtein().getMinimumValue(), (long) nutrients.getProtein().getMaximumValue());
-        Constraint carbs = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(),1)), (long) nutrients.getCarbohydrates().getMinimumValue(), (long) nutrients.getCarbohydrates().getMaximumValue());
-        Constraint fat = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 2)), (long) nutrients.getFat().getMinimumValue(), (long) nutrients.getFat().getMaximumValue());
-        Constraint kcal = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 3)), (long) nutrients.getKcal().getMinimumValue(), (long) nutrients.getKcal().getMaximumValue());
-        Constraint A = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 4)), (long) nutrients.getA().getMinimumValue(), (long) nutrients.getA().getMaximumValue());
-        Constraint B1 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 5)), (long) nutrients.getB1().getMinimumValue(), (long) nutrients.getB1().getMaximumValue());
-        Constraint B2 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 6)), (long) nutrients.getB2().getMinimumValue(), (long) nutrients.getB2().getMaximumValue());
-        Constraint PP = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 7)), (long) nutrients.getPP().getMinimumValue(), (long) nutrients.getPP().getMaximumValue());
-        Constraint C = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 8)), (long) nutrients.getC().getMinimumValue(), (long) nutrients.getC().getMaximumValue());
-        Constraint Ca = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 9)), (long) nutrients.getCa().getMinimumValue(), (long) nutrients.getCa().getMaximumValue());
-        Constraint P = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 10)), (long) nutrients.getP().getMinimumValue(), (long) nutrients.getP().getMaximumValue());
-        Constraint Fe = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 11)), (long) nutrients.getFe().getMinimumValue(), (long) nutrients.getFe().getMaximumValue());
+        Constraint protein = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll,_getColumnFromArray(productNutrientsCoefficientsArray,map.size(),0)), (long) nutrients.getProtein().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getProtein().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint carbs = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(),1)), (long) nutrients.getCarbohydrates().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getCarbohydrates().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint fat = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 2)), (long) nutrients.getFat().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getFat().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint kcal = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 3)), (long) nutrients.getKcal().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getKcal().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint A = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 4)), (long) nutrients.getA().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getA().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint B1 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 5)), (long) nutrients.getB1().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getB1().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint B2 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 6)), (long) nutrients.getB2().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getB2().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint PP = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 7)), (long) nutrients.getPP().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getPP().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint C = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 8)), (long) nutrients.getC().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getC().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint Ca = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 9)), (long) nutrients.getCa().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getCa().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint P = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 10)), (long) nutrients.getP().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getP().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint Fe = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 11)), (long) nutrients.getFe().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getFe().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
 
 
         CpSolver solver = new CpSolver();
@@ -137,7 +138,7 @@ public class MealsServiceImpl implements MealsService {
         for (Map.Entry<ProductDTO, IntVar > entry : map.entrySet()) {
             if(solver.value(entry.getValue()) > 0){
                 ProductDTO product = entry.getKey();
-                double value = Math.round(solver.value(entry.getValue()) / MODEL_SCALING_MULTIPLIER);
+                double value = solver.value(entry.getValue()) / MODEL_SCALING_MULTIPLIER;
 
                 mealProducts.add(new DailyProduct(product,value));
 
