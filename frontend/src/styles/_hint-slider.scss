@@ -22,7 +22,7 @@
     flex-direction: column;
     color: white;
     width: 50vw;
-    height: 50vh;
+    height: 60vh;
     padding: 1rem;
 
     .hint-text {
@@ -96,3 +96,37 @@
     }
   }
 }
+
+@media screen and (max-width: 1600px) {
+  .swiper {
+    width: 100%;
+    height: 100%;
+    .slide-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      width: 60vw;
+      height: 72vh;
+      padding: 1rem;
+    }
+  }  
+}
+
+@media screen and (max-width: 1400px) {
+  .swiper {
+    width: 100%;
+    height: 100%;
+    .slide-container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      width: 66vw;
+      height: 67vh;
+      padding: 1rem;
+    }
+  }  
+}
+
+

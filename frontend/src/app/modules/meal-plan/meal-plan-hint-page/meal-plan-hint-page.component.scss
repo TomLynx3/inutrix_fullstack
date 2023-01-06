@@ -16,17 +16,27 @@
 }
 
 .meal-product-list-img {
-  width: 500px;
-  height: 450px;
+  width: 600px;
+  height: 400px;
   margin-left: auto;
   margin-right: auto;
   object-fit: fill;
 }
 
 .adjust-mode-on {
-  width: 600px;
+  width: 550px;
   height: 350px;
   margin-left: auto;
   margin-right: auto;
   object-fit: fill;
+}
+
+@media screen and (max-width: 1600px) {
+  .meal-product-list-img {
+    width: 575px;
+    height: 375px;
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: fill;
+  }
 }
