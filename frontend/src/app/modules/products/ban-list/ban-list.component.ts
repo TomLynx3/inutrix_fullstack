@@ -88,7 +88,7 @@ export class BanListComponent implements OnInit {
 
   public openProductList(): void {
     if (this.sideBar) {
-      this._sideBarService.open(this.sideBar, '1450px');
+      this._sideBarService.open(this.sideBar, '94%');
     }
   }
 

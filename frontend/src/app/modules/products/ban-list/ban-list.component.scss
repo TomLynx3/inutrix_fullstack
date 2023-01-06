@@ -129,8 +129,8 @@
     .product-table {
       height: 100%;
       ::ng-deep table {
-        .mat-header-cell {
-          font-size: 1em;
+        .mat-header-cell:nth-child(1){
+          font-size: 0em;
         }
       }
     }
