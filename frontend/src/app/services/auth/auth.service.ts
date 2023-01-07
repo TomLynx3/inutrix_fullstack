@@ -16,8 +16,6 @@ export class AuthService {
   constructor(
     private readonly _http: HttpClient,
     private readonly _jwtHelper: JwtHelperService,
-    private readonly _router: Router,
-    private readonly _google: SocialAuthService
   ) {}
 
   public isAuthenticated(): boolean {
@@ -36,13 +34,7 @@ export class AuthService {
     return localStorage.getItem("token");
   }
 
-  public logout() {
-    this._google.signOut().then(() => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("route");
-      this._router.navigate(["/authenticate"]);
-    });
-  }
+
 
   public signIn(token: string): Observable<AuthResponse> {
     return this._http.post<AuthResponse>(this._controllerURL, { token });

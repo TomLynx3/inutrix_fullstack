@@ -136,7 +136,6 @@ export class ProductsTableComponent implements OnInit {
           this._translateService
             .get("PRODUCTS_TABLE_PRODUCTS_UPDATE_TO_LIST")
             .subscribe((tran: string) => {
-              console.log(tran);
               this._toastService.success(tran);
             });
         }

@@ -4,49 +4,49 @@ import {
   OnInit,
   TemplateRef,
   ViewChild,
-} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CustomIcon, IconFamily } from '@ibabylondev/custom-icon';
-import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
-import { Subject, debounceTime, combineLatest } from 'rxjs';
-import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
+} from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { CustomIcon, IconFamily } from "@ibabylondev/custom-icon";
+import { TranslateService } from "@ngx-translate/core";
+import { ToastrService } from "ngx-toastr";
+import { Subject, debounceTime, combineLatest } from "rxjs";
+import { ConfirmationDialogComponent } from "src/app/components/confirmation-dialog/confirmation-dialog.component";
 import {
   BannedProduct,
   GetBannedProductsRes,
   ProductDTO,
   ProductGroupDTO,
   ProductsService,
-} from 'src/app/services/products/products.service';
-import { BaseResponse } from 'src/app/utilities/types';
-import { SidemodalService } from '../../sidemodal/services/sidemodal.service';
-import { SideModalModule } from '../../sidemodal/sidemodal.module';
-import { ProductsTableComponent } from '../products-table/products-table.component';
+} from "src/app/services/products/products.service";
+import { BaseResponse } from "src/app/utilities/types";
+import { SidemodalService } from "../../sidemodal/services/sidemodal.service";
+import { SideModalModule } from "../../sidemodal/sidemodal.module";
+import { ProductsTableComponent } from "../products-table/products-table.component";
 
 @Component({
-  selector: 'product-ban-list',
-  templateUrl: './ban-list.component.html',
-  styleUrls: ['./ban-list.component.scss'],
+  selector: "product-ban-list",
+  templateUrl: "./ban-list.component.html",
+  styleUrls: ["./ban-list.component.scss"],
 })
 export class BanListComponent implements OnInit {
-  @ViewChild('sidebar') public sideBar: TemplateRef<any> | undefined;
+  @ViewChild("sidebar") public sideBar: TemplateRef<any> | undefined;
 
-  public displayedColumns: string[] = ['actions', 'name', 'productGroup'];
+  public displayedColumns: string[] = ["actions", "name", "productGroup"];
 
   public searchChange: Subject<SearchParams> = new Subject<SearchParams>();
 
   public addIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'plus'],
+    value: ["fas", "plus"],
   };
   public deleteIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'trash'],
+    value: ["fas", "trash"],
   };
 
   public searchIcon: CustomIcon = {
     iconFamily: IconFamily.FONTAWESOME,
-    value: ['fas', 'magnifying-glass'],
+    value: ["fas", "magnifying-glass"],
   };
 
   public bannedProducts: BannedProduct[] = [];
@@ -64,7 +64,7 @@ export class BanListComponent implements OnInit {
       .pipe(debounceTime(300))
       .subscribe((params: SearchParams) => {
         const products: ProductDTO[] = [];
-        const regex = new RegExp(params.input, 'i');
+        const regex = new RegExp(params.input, "i");
         for (let product of params.productTable.products) {
           if (
             product.name.match(regex) ||
@@ -81,14 +81,13 @@ export class BanListComponent implements OnInit {
       .subscribe((res: GetBannedProductsRes) => {
         if (res.success) {
           this.bannedProducts = res.result;
-          console.log(this.bannedProducts);
         }
       });
   }
 
   public openProductList(): void {
     if (this.sideBar) {
-      this._sideBarService.open(this.sideBar, '1450px');
+      this._sideBarService.open(this.sideBar, "1450px");
     }
   }
 
@@ -101,7 +100,7 @@ export class BanListComponent implements OnInit {
 
     if (products.length <= 0) {
       this._translateService
-        .get('PRODUCTS_BAN_PRODUCTS_NOT_SELECTED')
+        .get("PRODUCTS_BAN_PRODUCTS_NOT_SELECTED")
         .subscribe((tranx: string) => {
           this._toastService.warning(tranx);
         });
@@ -124,7 +123,7 @@ export class BanListComponent implements OnInit {
             this.bannedProducts = this.bannedProducts.concat(selectedProducts);
 
             this._translateService
-              .get('PRODUCTS_BAN_PRODUCTS_ADDED_TO_LIST')
+              .get("PRODUCTS_BAN_PRODUCTS_ADDED_TO_LIST")
               .subscribe((tran: string) => {
                 this._toastService.success(tran);
                 this._sideBarService.close();
@@ -155,10 +154,10 @@ export class BanListComponent implements OnInit {
     }
 
     combineLatest(
-      this._translateService.get('PRODUCTS_BAN_REMOVE_PRODUCTS'),
-      this._translateService.get('PRODUCTS_BAN_REMOVE_PRODUCTS_COUNT')
+      this._translateService.get("PRODUCTS_BAN_REMOVE_PRODUCTS"),
+      this._translateService.get("PRODUCTS_BAN_REMOVE_PRODUCTS_COUNT")
     ).subscribe(([title, text]: string[]) => {
-      text = text.replace('...', selectedProducts.length.toString());
+      text = text.replace("...", selectedProducts.length.toString());
 
       const ref = this._dialog.open(ConfirmationDialogComponent, {
         disableClose: true,
@@ -176,7 +175,7 @@ export class BanListComponent implements OnInit {
                 );
 
                 this._translateService
-                  .get('PRODUCTS_BAN_PRODUCTS_REMOVED_FROM_LIST')
+                  .get("PRODUCTS_BAN_PRODUCTS_REMOVED_FROM_LIST")
                   .subscribe((tran: string) => {
                     this._toastService.success(tran);
                   });

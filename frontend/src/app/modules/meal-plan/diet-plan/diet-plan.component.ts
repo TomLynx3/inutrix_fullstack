@@ -95,7 +95,6 @@ export class DietPlanComponent implements OnInit, OnChanges {
   private _initCurrentDietDay() {
     if (this.diet) {
       this.currentDietDay = this.diet.dietDays[this.currentIndex];
-      console.log(this.currentDietDay);
       if (this.allowMealChange) {
         this.products = this._mealService.castDailyProductToListItem(
           this._recalculateProductAmounts(

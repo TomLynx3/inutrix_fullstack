@@ -1,14 +1,14 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
-import { Observable } from 'rxjs';
-import { BaseResponse } from 'src/app/utilities/types';
+import { Observable } from "rxjs";
+import { BaseResponse } from "src/app/utilities/types";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class ProductsService {
-  private readonly _controllerURL = '/api/products';
+  private readonly _controllerURL = "/api/products";
 
   constructor(private readonly _http: HttpClient) {}
 
@@ -22,27 +22,9 @@ export class ProductsService {
     );
   }
 
-  public parseProducts(products: ProductDTO[]) {
-    for (let item of products) {
-      // this._translateService.get(item.name).subscribe((trans: string) => {
-      //   //console.log(trans);
-      //   item.name = trans;
-      // });
-      // this._translateService
-      //   .get(item.productGroup.groupName)
-      //   .subscribe((trans: string) => {
-      //     item.productGroup.groupName = trans;
-      //   });
-    }
-  }
+  public parseProducts(products: ProductDTO[]) {}
 
-  public parseProductsGroup(products: ProductGroupDTO[]) {
-    for (let item of products) {
-      // this._translateService.get(item.groupName).subscribe((trans: string) => {
-      //   item.groupName = trans;
-      // });
-    }
-  }
+  public parseProductsGroup(products: ProductGroupDTO[]) {}
 
   public banProducts(products: BannedProduct[]): Observable<BaseResponse> {
     return this._http.post<BaseResponse>(

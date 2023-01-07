@@ -1,3 +1,4 @@
+import { SocialAuthService } from "@abacritt/angularx-social-login";
 import {
   animate,
   state,
@@ -45,7 +46,7 @@ export class BaseComponent implements OnInit {
     private readonly _router: Router,
     private readonly _menuService: MenuService,
     private readonly _dialog: MatDialog,
-    private readonly _authService: AuthService
+    private readonly _authService: SocialAuthService
   ) {}
 
   //need add current menu item
@@ -157,7 +158,11 @@ export class BaseComponent implements OnInit {
   }
 
   public logout() {
-    this._authService.logout();
+    this._authService.signOut().then(() => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("route");
+      this._router.navigate(["/authenticate"]);
+    });
   }
 }
 

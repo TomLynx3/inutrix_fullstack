@@ -111,15 +111,12 @@ export class DietDayComponent implements OnInit, OnChanges {
     if (this.date) {
       const today = moment();
       const date = moment(this.date);
-      console.log(today);
-      console.log(date);
       if (date.isBefore(today, "day")) {
         this.allowUpdate = true;
       } else if (date.isAfter(today, "day")) {
         this.allowUpdate = false;
       } else {
         if (this.currentMealIndex > this._getCurrentMealTypeIndex()) {
-          console.log("sd");
           this.allowUpdate = false;
         } else {
           this.allowUpdate = true;
