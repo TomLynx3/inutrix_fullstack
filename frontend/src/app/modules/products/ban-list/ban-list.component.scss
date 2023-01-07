@@ -11,7 +11,7 @@
     overflow: hidden;
     min-width: 600px;
 
-    max-height: 400px;
+    max-height: 200px;
     min-height: 200px;
     overflow-y: scroll;
 
@@ -129,8 +129,8 @@
     .product-table {
       height: 100%;
       ::ng-deep table {
-        .mat-header-cell {
-          font-size: 1em;
+        .mat-header-cell:nth-child(1){
+          font-size: 0em;
         }
       }
     }
