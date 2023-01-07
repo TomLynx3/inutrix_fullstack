@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
+import { MealPlanHintPageComponent } from './meal-plan-hint-page/meal-plan-hint-page.component';
 @NgModule({
   declarations: [
     MealPlanComponent,
@@ -26,6 +27,7 @@ import { HttpClient } from '@angular/common/http';
     DietDayNutritionComponent,
     DietMealsComponent,
     DietsComponent,
+    MealPlanHintPageComponent,
   ],
   imports: [
     CommonModule,

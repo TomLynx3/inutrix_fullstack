@@ -51,7 +51,7 @@ public class MealsController {
 
         BaseResponse res = new BaseResponse();
 
-        res.setResult(_mealsService.createDiet(req.getDays()));
+        res.setResult(_mealsService.createDiet(req.getDays(),req.getDietGoal()));
         res.setSuccess(true);
 
         return res;

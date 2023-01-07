@@ -43,6 +43,10 @@ export class DietsComponent implements OnInit {
   public date: FormControl = new FormControl(moment().toDate());
 
   ngOnInit(): void {
+    this.fetchDiets();
+  }
+
+  public fetchDiets() {
     this._mealServive.getUserDiets().subscribe((res: GetUsetDietsRes) => {
       if (res.success) {
         this.diets = this._mealServive.castToDietMetadataListItems(res.result);

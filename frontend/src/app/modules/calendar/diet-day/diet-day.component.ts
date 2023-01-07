@@ -111,15 +111,12 @@ export class DietDayComponent implements OnInit, OnChanges {
     if (this.date) {
       const today = moment();
       const date = moment(this.date);
-      console.log(today);
-      console.log(date);
       if (date.isBefore(today, "day")) {
         this.allowUpdate = true;
       } else if (date.isAfter(today, "day")) {
         this.allowUpdate = false;
       } else {
         if (this.currentMealIndex > this._getCurrentMealTypeIndex()) {
-          console.log("sd");
           this.allowUpdate = false;
         } else {
           this.allowUpdate = true;
@@ -164,6 +161,7 @@ export class DietDayComponent implements OnInit, OnChanges {
       productsToUpdate.push(<ConsumedProduct>{
         productId: product.productId,
         consumed: product.consumed,
+        mealType: product.mealType,
       });
     }
 
@@ -182,6 +180,7 @@ export class DietDayComponent implements OnInit, OnChanges {
     const consumedProduct = <ConsumedProduct>{
       productId: product.id,
       consumed: product.consumed,
+      mealType: product.mealType,
     };
 
     this.onConsume.emit({ date: this.date!, products: [consumedProduct] });

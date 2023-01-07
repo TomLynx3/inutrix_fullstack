@@ -5,6 +5,8 @@ import com.google.ortools.linearsolver.MPConstraint;
 import com.google.ortools.linearsolver.MPObjective;
 import com.google.ortools.linearsolver.MPSolver;
 import com.google.ortools.linearsolver.MPVariable;
+import com.google.ortools.sat.*;
+import com.google.ortools.util.Domain;
 import com.rtu.iNutrix.models.DTO.Meals.*;
 import com.rtu.iNutrix.models.DTO.Products.ProductDTO;
 import com.rtu.iNutrix.models.DTO.UserDataDTO;
@@ -48,107 +50,81 @@ public class MealsServiceImpl implements MealsService {
     }
 
     @Override
-    public DietDayMetaData getDietDayMetadata() throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
+    public DietDayMetaData getDietDayMetadata(DietGoal goal) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
         Loader.loadNativeLibraries();
-        MPSolver solver = MPSolver.createSolver("GLOP");
+        CpModel model = new CpModel();
+        final double MODEL_SCALING_MULTIPLIER = 10;
+        final int MODEL_NUTRITION_MULTIPLIER = 100;
 
-        Nutrients nutrients  = _getNeededNutrients();
+        Nutrients nutrients  = _getNeededNutrients(goal);
 
         List<ProductDTO> products = _productService.getAllProducts();
 
-        HashMap<ProductDTO, MPVariable> map = new HashMap<>();
+        HashMap<ProductDTO, IntVar> map = new HashMap<>();
 
 
         for(ProductDTO product : products){
-            map.put(product,solver.makeNumVar(0.0,4,product.getName()));
+           if (product.isBanned()) continue;
+           Domain domain = Domain.fromIntervals(new long[][] {{0,0},{Math.round(0.2*MODEL_SCALING_MULTIPLIER), Math.round(4*MODEL_SCALING_MULTIPLIER)}});
+           map.put(product, model.newIntVarFromDomain(domain, product.getName()));
         }
 
 
         //Sugar Constrains
-        _addCustomConstraintForProductGroup(solver,map,"Sugar",0,1,LookUpConstants.LookUp_ProductGroup_ConfectioneryProducts);
+        _addCustomConstraintForProductGroup(model,map,"Sugar",0,(int)(1*MODEL_SCALING_MULTIPLIER),LookUpConstants.LookUp_ProductGroup_ConfectioneryProducts);
         //Fruit Constraints
-        _addCustomConstraintForProductGroup(solver,map,"Fruits",0,2,LookUpConstants.LookUp_ProductGroup_FruitsAndBerries);
+        _addCustomConstraintForProductGroup(model,map,"Fruits",0,(int)(2*MODEL_SCALING_MULTIPLIER),LookUpConstants.LookUp_ProductGroup_FruitsAndBerries);
         //Meat Constraints
        // _addCustomConstraintForProductGroup(solver,map,"Meat",1,3,LookUpConstants.LookUp_ProductGroup_MeatProducts);
         //Cereal Constraints
       //  _addCustomConstraintForProductGroup(solver,map,"Cereal Products",1,4.5,LookUpConstants.LookUp_ProductGroup_CerealProducts);
 
-        MPConstraint protein = solver.makeConstraint(nutrients.getProtein().getMinimumValue(),nutrients.getProtein().getMaximumValue(),"Protein");
-        MPConstraint carbs = solver.makeConstraint(nutrients.getCarbohydrates().getMinimumValue(),nutrients.getCarbohydrates().getMaximumValue(),"Carbs");
-        MPConstraint fat = solver.makeConstraint(nutrients.getFat().getMinimumValue(),nutrients.getFat().getMaximumValue(),"Fat");
-        MPConstraint kcal = solver.makeConstraint(nutrients.getKcal().getMinimumValue(),nutrients.getKcal().getMaximumValue(),"Kcal");
-        MPConstraint A = solver.makeConstraint(nutrients.getA().getMinimumValue(),nutrients.getA().getMaximumValue(),"A");
-        MPConstraint B1 = solver.makeConstraint(nutrients.getB1().getMinimumValue(),nutrients.getB1().getMaximumValue(),"B1");
-        MPConstraint B2 = solver.makeConstraint(nutrients.getB2().getMinimumValue(),nutrients.getB2().getMaximumValue(),"B2");
-        MPConstraint PP = solver.makeConstraint(nutrients.getPP().getMinimumValue(),nutrients.getPP().getMaximumValue(),"PP");
-        MPConstraint C = solver.makeConstraint(nutrients.getC().getMinimumValue(),nutrients.getC().getMaximumValue(),"C");
-        MPConstraint Ca = solver.makeConstraint(nutrients.getCa().getMinimumValue(),nutrients.getCa().getMaximumValue(),"Ca");
-        MPConstraint P = solver.makeConstraint(nutrients.getP().getMinimumValue(),nutrients.getP().getMaximumValue(),"P");
-        MPConstraint Fe = solver.makeConstraint(nutrients.getFe().getMinimumValue(),nutrients.getFe().getMaximumValue(),"Fe");
-
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            protein.setCoefficient(entry.getValue(),entry.getKey().getProtein());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            carbs.setCoefficient(entry.getValue(),entry.getKey().getCarbohydrates());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            fat.setCoefficient(entry.getValue(),entry.getKey().getFat());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            kcal.setCoefficient(entry.getValue(),entry.getKey().getKcal());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-           A.setCoefficient(entry.getValue(),entry.getKey().getA());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            B1.setCoefficient(entry.getValue(),entry.getKey().getB1());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            B2.setCoefficient(entry.getValue(),entry.getKey().getB2());
-        }
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            PP.setCoefficient(entry.getValue(),entry.getKey().getPP());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            C.setCoefficient(entry.getValue(),entry.getKey().getC());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            Ca.setCoefficient(entry.getValue(),entry.getKey().getCa());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            P.setCoefficient(entry.getValue(),entry.getKey().getP());
-        }
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            Fe.setCoefficient(entry.getValue(),entry.getKey().getFe());
-        }
-
-        MPObjective objective = solver.objective();
-
-        int min = 1;
-        int max = 10;
-
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            objective.setCoefficient(entry.getValue(),(int)Math.floor(Math.random()*(max-min+1)+min));
+        IntVar[] intVarsAll = new IntVar[map.size()];
+        /*
+        0 - protein, 1 - carbs, 2 - fat, 3 - kcal, 4 - A, 5 - B1, 6 - B2
+        7 - PP, 8 - C, 9 - Ca, 10 - P, 11 - Fe
+         */
+        long[][] productNutrientsCoefficientsArray = new long[map.size()][12];
+        int i = 0; // :P
+        for (Map.Entry<ProductDTO, IntVar> entry : map.entrySet()) {
+            intVarsAll[i] = entry.getValue();
+            long[] arrayRow = productNutrientsCoefficientsArray[i];
+            arrayRow[0] = Math.round(entry.getKey().getProtein() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[1] = Math.round(entry.getKey().getCarbohydrates() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[2] = Math.round(entry.getKey().getFat() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[3] = Math.round(entry.getKey().getKcal() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[4] = Math.round(entry.getKey().getA() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[5] = Math.round(entry.getKey().getB1() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[6] = Math.round(entry.getKey().getB2() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[7] = Math.round(entry.getKey().getPP() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[8] = Math.round(entry.getKey().getC() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[9] = Math.round(entry.getKey().getCa() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[10] = Math.round(entry.getKey().getP() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            arrayRow[11] = Math.round(entry.getKey().getFe() / MODEL_SCALING_MULTIPLIER*MODEL_NUTRITION_MULTIPLIER);
+            i++;
         }
 
 
+        Constraint protein = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll,_getColumnFromArray(productNutrientsCoefficientsArray,map.size(),0)), (long) nutrients.getProtein().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getProtein().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint carbs = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(),1)), (long) nutrients.getCarbohydrates().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getCarbohydrates().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint fat = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 2)), (long) nutrients.getFat().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getFat().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint kcal = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 3)), (long) nutrients.getKcal().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getKcal().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint A = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 4)), (long) nutrients.getA().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getA().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint B1 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 5)), (long) nutrients.getB1().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getB1().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint B2 = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 6)), (long) nutrients.getB2().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getB2().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint PP = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 7)), (long) nutrients.getPP().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getPP().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint C = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 8)), (long) nutrients.getC().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getC().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint Ca = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 9)), (long) nutrients.getCa().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getCa().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint P = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 10)), (long) nutrients.getP().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getP().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
+        Constraint Fe = model.addLinearConstraint(LinearExpr.scalProd(intVarsAll, _getColumnFromArray(productNutrientsCoefficientsArray,map.size(), 11)), (long) nutrients.getFe().getMinimumValue()* MODEL_NUTRITION_MULTIPLIER, (long) nutrients.getFe().getMaximumValue()* MODEL_NUTRITION_MULTIPLIER);
 
-        objective.setMaximization();
 
-        final MPSolver.ResultStatus resultStatus = solver.solve();
-        if (resultStatus == MPSolver.ResultStatus.INFEASIBLE | resultStatus == MPSolver.ResultStatus.NOT_SOLVED) {
+        CpSolver solver = new CpSolver();
+        CpSolverStatus resultStatus = solver.solve(model);
+
+
+        if (resultStatus == CpSolverStatus.INFEASIBLE | resultStatus == CpSolverStatus.MODEL_INVALID) {
+            String reason = model.validate();
             throw new SolverErrorCodes.SolutionNotFoundException();
         }
 
@@ -159,10 +135,10 @@ public class MealsServiceImpl implements MealsService {
 
         metadata.setProducts(mealProducts);
 
-        for (Map.Entry<ProductDTO, MPVariable> entry : map.entrySet()) {
-            if(entry.getValue().solutionValue() > 0){
+        for (Map.Entry<ProductDTO, IntVar > entry : map.entrySet()) {
+            if(solver.value(entry.getValue()) > 0){
                 ProductDTO product = entry.getKey();
-                double value = entry.getValue().solutionValue();
+                double value = solver.value(entry.getValue()) / MODEL_SCALING_MULTIPLIER;
 
                 mealProducts.add(new DailyProduct(product,value));
 
@@ -176,7 +152,7 @@ public class MealsServiceImpl implements MealsService {
     }
 
     @Override
-    public DietDTO createDiet(int days) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
+    public DietDTO createDiet(int days,DietGoal goal) throws IllegalAccessException, SolverErrorCodes.SolutionNotFoundException {
 
         DietDTO dietDTO = new DietDTO();
         List<DietDayDTO> dietDayDTOS = new ArrayList<>();
@@ -184,9 +160,7 @@ public class MealsServiceImpl implements MealsService {
 
         DietDetails details = new DietDetails();
 
-        details.setDietGoal(DietGoal.BALANCEDIET);
-
-
+        details.setDietGoal(goal);
 
 
         for(int i = 0; i<days;i++){
@@ -194,7 +168,7 @@ public class MealsServiceImpl implements MealsService {
 
             ZonedDateTime date =  today.plusDays(i);
 
-            DietDayMetaData day = getDietDayMetadata();
+            DietDayMetaData day = getDietDayMetadata(goal);
             day.setMeals(getMealsForDay(day.getProducts()));
 
             dietDayDTO.setDate(date);
@@ -218,7 +192,7 @@ public class MealsServiceImpl implements MealsService {
     }
 
     @Override
-    public List<MealDTO> getMealsForDay(List<DailyProduct> products) {
+    public List<MealDTO> getMealsForDay(List<DailyProduct> products) throws SolverErrorCodes.SolutionNotFoundException {
        Loader.loadNativeLibraries();
         class ProductHelper {
             DailyProduct dailyProduct;
@@ -277,7 +251,7 @@ public class MealsServiceImpl implements MealsService {
         if (resultStatusBreakfast == MPSolver.ResultStatus.OPTIMAL || resultStatusBreakfast == MPSolver.ResultStatus.FEASIBLE){
             for (ProductHelper productHelper : productHelperList) productHelper.productAmountUsed[0] = productHelper.mpVariable.solutionValue();
         }
-        else return null;
+        else throw new SolverErrorCodes.SolutionNotFoundException();
         solver.clear();
 
         // lunch
@@ -305,7 +279,7 @@ public class MealsServiceImpl implements MealsService {
         if (resultStatusLunch == MPSolver.ResultStatus.OPTIMAL || resultStatusLunch == MPSolver.ResultStatus.FEASIBLE){
             for (ProductHelper productHelper: productHelperList) productHelper.productAmountUsed[1] = productHelper.mpVariable.solutionValue();
         }
-        else return null;
+        else throw new SolverErrorCodes.SolutionNotFoundException();
 
         // dinner
         // All remaining unused products are used for dinner
@@ -370,20 +344,33 @@ public class MealsServiceImpl implements MealsService {
         return null;
     }
 
-    private void _addCustomConstraintForProductGroup(MPSolver solver ,HashMap<ProductDTO,MPVariable> variables, String name,double lowerValue,double upperValue,UUID productGroup){
-        Map<ProductDTO, MPVariable> filtredVariables = variables.entrySet().stream().filter(x->x.getKey().getProductGroup().getId().equals(productGroup)).collect(Collectors.toMap(e->e.getKey(),e->e.getValue()));
-
-        MPConstraint constraint = solver.makeConstraint(lowerValue,upperValue,name);
-
-        for (Map.Entry<ProductDTO, MPVariable> entry :filtredVariables.entrySet()) {
-            constraint.setCoefficient(entry.getValue(),1);
+    private void _addCustomConstraintForProductGroup(CpModel model ,HashMap<ProductDTO,IntVar> variables, String name, int lowerValue, int upperValue,UUID productGroup){
+        Map<ProductDTO, IntVar> filtredVariables = variables.entrySet().stream().filter(x->x.getKey().getProductGroup().getId().equals(productGroup)).collect(Collectors.toMap(e->e.getKey(),e->e.getValue()));
+        IntVar[] intVars = new IntVar[filtredVariables.size()];
+        int i = 0;
+        for (Map.Entry<ProductDTO, IntVar> entry : filtredVariables.entrySet()) {
+            intVars[i++] = entry.getValue();
         }
+        Constraint constraint = model.addLinearConstraint(LinearExpr.sum(intVars), lowerValue, upperValue);
+    }
+
+    private long[] _getColumnFromArray(long[][] array, int rowCount, int columnIndex) {
+        long[] result = new long[rowCount];
+        for (int i = 0; i < rowCount; i++) {
+            result[i] = array[i][columnIndex];
+        }
+        return result;
     }
 
 
-
-    private Nutrients _getNeededNutrients(){
+    private Nutrients _getNeededNutrients(DietGoal goal){
         double caloriesNeededPerDay = _getAMRrate() * _getMBR();
+
+        if(goal == DietGoal.MUSCLEGROWTH){
+            caloriesNeededPerDay+= 250;
+        }else if(goal == DietGoal.WEIGHTLOSS){
+            caloriesNeededPerDay-= 250;
+        }
 
         //Carbs 4 calories per gram
         //Protein 4 calories per gram

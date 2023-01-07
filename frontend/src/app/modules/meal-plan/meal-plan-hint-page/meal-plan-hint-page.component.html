@@ -1,0 +1,175 @@
+<swiper [pagination]="true" class="mySwiper">
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "MEAL_PLAN_GENERAL_INFO_1" | translate }}</span
+        >
+      </div>
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "MEAL_PLAN_GENERAL_INFO_2" | translate }}</span
+        >
+      </div>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/create_img.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_CREATE_DIET" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <div class="row">
+        <div class="col-6">
+          <img
+            src="assets/images/hints/meal-plans/diet_params.png"
+            class="diet-params-img"
+          />
+        </div>
+        <div class="col-6">
+          <p class="text">
+            {{ "MEAL_PLAN_HINT_CREATE_DIET_DIET_TYPES" | translate }}
+          </p>
+          <p class="text">
+            {{ "MEAL_PLAN_HINT_CREATE_DIET_DIET_TYPES_INFO_1" | translate }}
+          </p>
+          <p class="text">
+            {{ "MEAL_PLAN_HINT_CREATE_DIET_DIET_TYPES_INFO_2" | translate }}
+          </p>
+          <p class="text">
+            {{ "MEAL_PLAN_HINT_CREATE_DIET_DIET_TYPES_INFO_3" | translate }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/action_bar.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_ACTION_BAR" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/switch_days.png"
+        class="info-img"
+      />
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_ACTION_BAR_SWITCH_DAYS" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/show_nutrients.png"
+        class="info-img"
+      />
+      <img
+        src="assets/images/hints/meal-plans/nutrients.png"
+        class="nutrients-img"
+      />
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_ACTION_BAR_NUTRIENTS" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/product_list.png"
+        class="product-img"
+      />
+
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_PRODUCT_LIST" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/meal_products.png"
+        class="meal-product-list-img"
+      />
+
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_MEAL_LIST" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/adjust_mode.png"
+        class="info-img"
+      />
+
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_MEAL_LIST_ADJUST" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/adjust_mode_on.png"
+        class="adjust-mode-on"
+      />
+
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_MEAL_LIST_ADJUST_MODE" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/save_diet.png"
+        class="info-img"
+      />
+
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_SAVE_DIET" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/meal-plans/set_active.png"
+        class="info-img"
+      />
+
+      <p class="hint-text">
+        {{ "MEAL_PLAN_HINT_DIET_INFO_SET_ACTIVE_DIET" | translate }}
+      </p>
+    </div>
+  </ng-template>
+</swiper>

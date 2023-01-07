@@ -117,6 +117,7 @@ export interface DietProgressProductDTO extends ProductBase {
 export interface ConsumedProduct {
   productId: string;
   consumed: boolean;
+  mealType: MealType;
 }
 
 export interface DietProgress {

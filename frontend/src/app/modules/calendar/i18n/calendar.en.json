@@ -5,5 +5,10 @@
   "CELENDAR_PROGRESS_UPDATE_SUCCESSFULLY": "Progress is updated!",
   "CALENDAR_NO_ACTIVE_DIET": "You don't have any active diet. Please go to",
   "CALENDAR_NO_ACTIVE_DIET_2": "to set a diet.",
-  "CALENDAR_MEAL_PLANS": "Meal plans"
+  "CALENDAR_MEAL_PLANS": "Meal plans",
+  "CALENDAR_HINTS_GENERAL_INFO": "In this part of the application user can view/update progress of current active diet",
+  "CALENDAR_HINTS_CALENDAR_INFO": "User can use calendar to switch between diet days",
+  "CALENDAR_HINTS_SET_CONSUMED": "To update progress user have to check in products which he consumed or whole meal",
+  "CALENDAR_HINTS_PROGRESS": "Progress is shown as a percentage and is ratio of consumed products over total products",
+  "CALENDAR_HINTS_UPDATE_PROGRESS": "After consumed products are selected user must press UPDATE PROGRESS button to save progress"
 }

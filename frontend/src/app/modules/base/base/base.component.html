@@ -39,10 +39,12 @@
         <span *ngIf="currentPage">{{ currentPage.name | translate }}</span>
         <custom-icon [iconData]="infoIcon" (click)="showHint()"></custom-icon>
       </div>
+      <div class="exit-icon" (click)="logout()">
+        <custom-icon [iconData]="exitIcon" ></custom-icon>
+      </div>
     </mat-toolbar>
     <div class="content custom-card">
       <router-outlet></router-outlet>
- 
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

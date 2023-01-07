@@ -1,0 +1,70 @@
+<swiper [pagination]="true" class="mySwiper">
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <div class="info-box">
+        <div class="icon-container custom-card">
+          <custom-icon [iconData]="exMark"></custom-icon>
+        </div>
+        <span class="info-text">
+          {{ "CALENDAR_HINTS_GENERAL_INFO" | translate }}</span
+        >
+      </div>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img src="assets/images/hints/calendar/calendar.png" class="info-img" />
+      <p class="hint-text">
+        {{ "CALENDAR_HINTS_CALENDAR_INFO" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/calendar/consume_product.png"
+        class="info-img"
+      />
+
+      <p class="hint-text">
+        {{ "CALENDAR_HINTS_SET_CONSUMED" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/calendar/consume_meal.png"
+        class="info-img"
+      />
+
+      <p class="hint-text">
+        {{ "CALENDAR_HINTS_SET_CONSUMED" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/calendar/update_progress.png"
+        class="info-img"
+      />
+
+      <p class="hint-text">
+        {{ "CALENDAR_HINTS_UPDATE_PROGRESS" | translate }}
+      </p>
+    </div>
+  </ng-template>
+  <ng-template swiperSlide>
+    <div class="slide-container">
+      <img
+        src="assets/images/hints/calendar/progress.png"
+        class="progress-img"
+      />
+
+      <p class="hint-text">
+        {{ "CALENDAR_HINTS_PROGRESS" | translate }}
+      </p>
+    </div>
+  </ng-template>
+</swiper>
