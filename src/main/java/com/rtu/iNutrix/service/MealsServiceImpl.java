@@ -74,10 +74,6 @@ public class MealsServiceImpl implements MealsService {
         _addCustomConstraintForProductGroup(model,map,"Sugar",0,(int)(1*MODEL_SCALING_MULTIPLIER),LookUpConstants.LookUp_ProductGroup_ConfectioneryProducts);
         //Fruit Constraints
         _addCustomConstraintForProductGroup(model,map,"Fruits",0,(int)(2*MODEL_SCALING_MULTIPLIER),LookUpConstants.LookUp_ProductGroup_FruitsAndBerries);
-        //Meat Constraints
-       // _addCustomConstraintForProductGroup(solver,map,"Meat",1,3,LookUpConstants.LookUp_ProductGroup_MeatProducts);
-        //Cereal Constraints
-      //  _addCustomConstraintForProductGroup(solver,map,"Cereal Products",1,4.5,LookUpConstants.LookUp_ProductGroup_CerealProducts);
 
         IntVar[] intVarsAll = new IntVar[map.size()];
         /*
